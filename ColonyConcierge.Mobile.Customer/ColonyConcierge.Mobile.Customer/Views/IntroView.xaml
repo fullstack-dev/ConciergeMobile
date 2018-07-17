@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+		     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             x:Class="ColonyConcierge.Mobile.Customer.IntroView">
+  <ContentView.Content>
+	<Grid BackgroundColor="Transparent" VerticalOptions="Fill">
+		<ffimageloading:CachedImage Opacity="0" IsVisible="false" x:Name="ImageBackground" Aspect="AspectFill"/>	
+		<Grid x:Name="GridContent" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="Fill">
+			<Grid x:Name="GridLogo" HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="0" RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition x:Name="RowDefinitionLogo" Height="auto"/>
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="8*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<StackLayout Grid.ColumnSpan="3" Grid.Row="1" x:Name="StackLayoutBGLogo" BackgroundColor="#D9FFFFFF" VerticalOptions="CenterAndExpand" Margin="0,0,0,0" Spacing="0" Orientation="Vertical"/>
+        		<ffimageloading:CachedImage Grid.Row="1" Grid.Column="1" x:Name="ImageLogo" HorizontalOptions="Fill" VerticalOptions="Center" DownsampleToViewSize="true" Aspect="AspectFit"/>
+				<Grid x:Name="StackLayoutYourAsystant" Grid.Row="2" Grid.ColumnSpan="3" Padding="0,0,0,66" Opacity="0" HorizontalOptions="Fill" BackgroundColor="#49000000" RowSpacing="0">
+	    			<ffimageloading:CachedImage x:Name="ImageAsystant" Source="your_asystant.png" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" DownsampleToViewSize="true" Aspect="AspectFit"/>
+				</Grid>
+			</Grid>
+			<StackLayout x:Name="GridTitle" VerticalOptions="Center" Margin="0,0,0,40" Spacing="10" Orientation="Vertical" BackgroundColor="Transparent">
+	            <Label Margin="30, 0" Text="{Binding Title}" FontAttributes="Bold" FontSize="Large" HorizontalTextAlignment="Center" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+	            <Image x:Name="ImageImage" Margin="100,0,100,0" Source="{Binding Image}" Aspect="AspectFit" HeightRequest="200"/>
+	            <Label Margin="50,0,50,0" Text="{Binding SubTitle}" FontAttributes="Bold" FontSize="Large" HorizontalTextAlignment="Center" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+	            <Label Margin="50,0,50,0" Text="{Binding Description}" HorizontalTextAlignment="Center" FontSize="Medium" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+	        </StackLayout>
+		</Grid>
+	</Grid>
+  </ContentView.Content>
+</ContentView>

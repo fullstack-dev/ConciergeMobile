@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColonyConcierge.Mobile.Customer.ScheduledPage"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             Title="{i18n:Translate Scheduled}"
+             BackgroundColor="#fff">
+    <Grid>
+        <ListView x:Name="ListViewScheduled" IsPullToRefreshEnabled="true" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Grid>
+                                <Grid BackgroundColor="#fff" Padding="0, 15, 0, 15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.8*"/>
+                                        <ColumnDefinition Width="8.4*"/>
+                                        <ColumnDefinition Width="0.4*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="0.4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+                                        <Label Text="{Binding Name}" FontSize="Medium">
+                                        </Label>
+                                        <StackLayout Orientation="Horizontal" Spacing="0">
+                                            <Label Text="{i18n:Translate ScheduledDate}" FontSize="Small">
+                                            </Label>
+                                            <Label Text=": " FontSize="Small">
+                                            </Label>
+                                            <Label Text="{Binding Model.ServiceDate, Converter={StaticResource simpleDateToStringConverter}}" FontSize="Small">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="0" IsVisible="{Binding IsTimeShowed}">
+                                            <Label Text="{i18n:Translate ScheduledTime}" FontSize="Small">
+                                            </Label>
+                                            <Label Text=": " FontSize="Small">
+                                            </Label>
+                                            <Label Text="{Binding Time}" FontSize="Small">
+                                            </Label>
+                                        </StackLayout>
+                                        <!--						<StackLayout Orientation="Horizontal" Spacing="0" IsVisible="{Binding IsStatusShowed}">
+		                    <Label Text="{i18n:Translate Status}" FontSize="Small"/>
+							<Label Text=": " FontSize="Small"/>
+							<Label Text="{Binding Status}" FontSize="Small"/>
+						</StackLayout>-->
+                                    </StackLayout>
+                                    <Image Grid.Column="3" Source="next.png" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False"/>
+                                </Grid>
+                                <Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="End" HorizontalOptions="Fill"/>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Image x:Name="ImageEmpty" IsVisible="false" Source="noscheduledservices.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Center" IsEnabled="false" Opacity="0.4"/>
+        <local:ActivityIndicatorView x:Name="_activityIndicator"/>
+    </Grid>
+</ContentPage>

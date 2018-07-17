@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+	 		 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:vm="clr-namespace:ColonyConcierge.Mobile.Customer.ViewModels"
+             x:Class="ColonyConcierge.Mobile.Customer.MainPage"
+			x:Name="thisPage">
+	<Grid>
+		<Grid RowSpacing="0" Padding="0,0,0,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition x:Name="RowDefinitionImageDoubleButton" Height="auto"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.RowSpan="2">
+				<Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="0" RowSpacing="0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="8*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+		            <ffimageloading:CachedImage Margin="0,1,0,0" Source="asystyou_logo.png" Grid.Row="1" Grid.Column="1" BackgroundColor="#ffffff" HorizontalOptions="Fill" VerticalOptions="Center" DownsampleToViewSize="true" Aspect="AspectFit"/>
+				</Grid>
+
+<!--				<ffimageloading:CachedImage x:Name="ImageBackground" Source="shutterstock.png" DownsampleToViewSize="true" Aspect="AspectFill"/>-->
+				<local:CarouselViewControlCustom Orientation="Horizontal" x:Name="Carousel"
+			                    ShowIndicators="true"
+			                    Position="0" 
+					 			BackgroundColor="Transparent"
+			                    VerticalOptions="Fill"
+			                    HorizontalOptions="Fill">
+					<controls:CarouselViewControl.ItemTemplate>
+					  <DataTemplate>
+						    <local:IntroView />
+					  </DataTemplate>
+					</controls:CarouselViewControl.ItemTemplate>
+				</local:CarouselViewControlCustom>
+			</Grid>
+
+			
+			<Grid x:Name="GridDoubleButton" Grid.Row="1" VerticalOptions="Fill"  HorizontalOptions="Fill" ColumnSpacing="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid x:Name="GridDouble" VerticalOptions="Center" HorizontalOptions="Fill" Grid.ColumnSpan="2" ColumnSpacing="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+	<!--					<ColumnDefinition Width="14*"/>-->
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+	<!--				<Image Grid.Column="1" x:Name="ImageDoubleButton" Source="double_button_bg.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center"/>-->
+					<Grid Grid.Column="0" BackgroundColor="#43B02A" HorizontalOptions="Fill" VerticalOptions="Fill" />
+					<Grid Grid.Column="1" BackgroundColor="#FCC438" HorizontalOptions="Fill" VerticalOptions="Fill" />
+				</Grid>
+				
+				<Grid x:Name="ButtonSignUp" Grid.Column="0">				
+					<Label  TextColor="White" Text="{i18n:Translate SignUpUp}" HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+				</Grid>
+				<Grid x:Name="ButtonGetStarted" Grid.Column="1">	
+					<Label TextColor="White" Text="{i18n:Translate GetStarted}" HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+				</Grid>
+			</Grid>
+
+		</Grid>
+		<local:ActivityIndicatorView 
+                     IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

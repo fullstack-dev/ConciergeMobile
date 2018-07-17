@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             Title="{i18n:Translate ServiceListing}"
+			 Icon="menu.png"
+			 x:Name="thisPage"
+             x:Class="ColonyConcierge.Mobile.Customer.HomeMasterPage">
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" RowSpacing="3" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="auto" />
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<StackLayout Orientation="Vertical" Padding="12, 20, 12, 3">
+					<Label x:Name="lbName" TextColor="#fff" />
+				</StackLayout>
+			</Grid>
+            <ListView BackgroundColor="Transparent" Grid.Row="1" x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None" ItemsSource="{Binding Source={x:Reference thisPage}, Path=Pages}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+						<ViewCell>
+	                        <Grid BackgroundColor="{Binding BackgroundColor}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition  Width="auto" />
+									<ColumnDefinition  Width="*" />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0" Padding="10, 6" >
+	                                <ffimageloading:CachedImage  Source="{Binding IconSource}" WidthRequest="22" CacheType="Memory"/>
+								</Grid>
+								<Grid Grid.Column="1" VerticalOptions="Center">
+	                                <Label Text="{Binding Title}" TextColor="#fff" />
+								</Grid>	
+							</Grid>
+                    	</ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+			<Grid Grid.Row="2">
+				<StackLayout Orientation="Vertical" Padding="10, 0" Spacing="6" HorizontalOptions="End">
+					<Image x:Name="ImageLogo" Source="asystyou_green.png" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" />
+					<StackLayout Orientation="Horizontal" HorizontalOptions="End">
+						<Label x:Name="LabelAppVersion" Text="{i18n:Translate AppVersion}" TextColor="#99EE99" />
+					</StackLayout>
+					<StackLayout Margin="0,0,0,6" x:Name="StackLayoutLegal" Orientation="Horizontal" HorizontalOptions="End">
+						<Label x:Name="LabelTermsConditions" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small" Text="{i18n:Translate TermsConditions}" TextColor="#fff" />
+						<Label x:Name="LabelSeparate" Text="|" TextColor="#fff" FontSize="Small"/>
+						<Label x:Name="LabelPrivacyPolicy" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{i18n:Translate PrivacyPolicy}" TextColor="#fff" FontSize="Small"/>
+					</StackLayout>
+				</StackLayout>
+			</Grid>
+        </Grid>
+    </ContentPage.Content>
+</local:ContentPageBase>

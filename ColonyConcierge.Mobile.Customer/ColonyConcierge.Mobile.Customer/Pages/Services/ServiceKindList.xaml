@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             x:Class="ColonyConcierge.Mobile.Customer.ServiceKindList"
+			 x:Name="thisPage"
+			 NavigationPage.BackButtonTitle="{i18n:Translate Back}">
+  <Grid BackgroundColor="#fff" RowSpacing="0">
+    <ListView x:Name="ListViewServices" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.View>
+				<Grid>
+					<Grid BackgroundColor="#fff" Padding="20, 10, 20, 10">
+					    <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+							<Grid ColumnSpacing="0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="auto"/>
+								</Grid.ColumnDefinitions>
+					      		<Label Text="{Binding Model.DisplayName}" HorizontalOptions="Start" FontSize="Large"/>
+							    <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0">
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" Spacing="0">
+			                   			<Label Text="$" IsVisible="{Binding HasFee}" HorizontalOptions="End" FontSize="Small"/>
+			                   			<Label Text="{Binding Fee}" HorizontalOptions="End" FontSize="Small"/>
+									</StackLayout>
+									<Label Text="{Binding FeeDescription}" HorizontalOptions="End" FontSize="Small"/>
+							  	</StackLayout>
+							</Grid>
+					      	<Label Text="{Binding Model.DetailedDescription}" LineBreakMode="WordWrap" HorizontalOptions="Start" FontSize="Small"/>
+					    </StackLayout>
+					</Grid>
+					<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="End" HorizontalOptions="Fill"/>
+				</Grid>
+            </ViewCell.View>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</local:ContentPageBase>

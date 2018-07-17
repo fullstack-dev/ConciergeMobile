@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="ColonyConcierge.Mobile.Customer.ServiceRequestDetailsPage"
+             Title="{i18n:Translate MyRequest}"
+             x:Name="thisPage">
+	<Grid>
+		<Grid x:Name="GridContent" RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			  <Grid Grid.Row="1" x:Name="GridPersonal" IsVisible="false">
+				<ScrollView Padding="0, 5">
+					<StackLayout Orientation="Vertical">
+				    	<Label x:Name="LabelPersonalScheduledService" Margin="10, 5" Text="{Binding Source={x:Reference thisPage}, Path=ScheduledService.Name}" FontSize="Large"/>
+						<StackLayout Spacing="6">
+						<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+							<Label FontSize="Small" Text="{i18n:Translate ServiceAddress}" TextColor="Black" FontAttributes="Bold"/>
+						</StackLayout>
+						<Label x:Name="addressLabelPersonal" FontSize="Medium" Margin="10, 0"/>
+						</StackLayout>
+						<StackLayout Spacing="6">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate StartDate}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<DatePicker x:Name="DatePickerServicePersonal" Margin="10, 0"/>
+						</StackLayout>
+						<StackLayout x:Name="StackLayoutDatePickerEndDatePersonal" Spacing="6">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate EndDate}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<DatePicker x:Name="DatePickerEndDatePersonal" Margin="10, 0"/>
+						</StackLayout>
+						<StackLayout x:Name="StackLayoutWaiting" Orientation="Vertical" IsVisible="false" VerticalOptions="Start" Margin="10">
+						</StackLayout>
+						<StackLayout x:Name="StackLayoutHouseSitting" IsVisible="false" VerticalOptions="Start" Margin="10">
+						</StackLayout>
+						<StackLayout x:Name="StackLayoutLaundryService" Orientation="Vertical" IsVisible="false" VerticalOptions="Start" Margin="10">
+						</StackLayout>	
+						<Label x:Name="LabelProvideCommentPersonal" Grid.Row="1" FontSize="Medium" Margin="10, 0, 10, 6"/>
+						<Editor x:Name="EntryProvideCommentPersonal" Grid.Row="1" FontSize="Medium" Margin="10, 0, 10, 6"/>
+					</StackLayout>
+				</ScrollView>
+			  </Grid>
+			  <StackLayout Grid.Row="1" x:Name="StackLayoutSpecial" IsVisible="false" Orientation="Vertical" Padding="0, 5">
+			    	<Label x:Name="LabelSpecialScheduledService" Margin="10, 5" Text="{Binding Source={x:Reference thisPage}, Path=ScheduledService.Name}" FontSize="Large"/>
+					<StackLayout Spacing="6">
+					<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+						<Label FontSize="Small" Text="{i18n:Translate ServiceAddress}" TextColor="Black" FontAttributes="Bold"/>
+					</StackLayout>
+					<Label x:Name="addressLabelSpecial" FontSize="Medium" Margin="10, 0"/>
+					</StackLayout>
+					<StackLayout Spacing="6">
+						<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+							<Label FontSize="Small" Text="{i18n:Translate Date}" TextColor="Black" FontAttributes="Bold"/>
+						</StackLayout>
+						<DatePicker x:Name="DatePickerServiceSpecial" Margin="10, 0"/>
+					</StackLayout>
+					<Label x:Name="LabelProvideCommentSpecial" Grid.Row="1" FontSize="Medium" Margin="10, 0, 10, 6"/>
+					<Editor x:Name="EntryProvideCommentSpecial" Grid.Row="1" FontSize="Medium" Margin="10, 0, 10, 6"/>
+	       	  </StackLayout>
+			  <Grid Grid.Row="1" x:Name="GridErrand" IsVisible="false">
+				<ScrollView Grid.Row="0" Orientation="Vertical" Padding="0, 5">
+					<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Spacing="6" Margin="0, 5">
+				    	<Label x:Name="LabelErrandScheduledService" Margin="10, 5" Text="{Binding Source={x:Reference thisPage}, Path=ScheduledService.Name}" FontSize="Large"/>
+						<StackLayout Spacing="6">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate ServiceAddress}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<Label x:Name="addressLabelErrand" FontSize="Medium" Margin="10, 0"/>
+						</StackLayout>
+						<StackLayout Spacing="6">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate ServiceDate}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<DatePicker x:Name="DatePickerServiceErrand" Margin="10, 0"/>
+							<StackLayout Orientation="Vertical" Margin="10, 6" Spacing="0">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition>
+											<ColumnDefinition.Width>
+								                <OnPlatform x:TypeArguments="GridLength"  iOS="*" Android="auto" WinPhone="auto" />
+											</ColumnDefinition.Width>
+										</ColumnDefinition>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="auto"/>
+										<RowDefinition Height="auto"/>	
+									</Grid.RowDefinitions>
+									<local:CheckBoxCustom Grid.Column="0" Grid.Row="0" x:Name="CheckBoxStartTime" Checked="false" DefaultText="{i18n:Translate StartDate}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Fill"/>
+									<Picker Grid.Column="1" Grid.Row="0" x:Name="PickerStartTime" VerticalOptions="Center"/>
+									<local:CheckBoxCustom Grid.Column="0" Grid.Row="1" x:Name="CheckBoxEndTime" Checked="false" DefaultText="{i18n:Translate EndDate}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Fill"/>
+									<Picker Grid.Column="1" Grid.Row="1" x:Name="PickerEndTime" VerticalOptions="Center"/>
+								</Grid>
+								<Label Margin="10, 0" x:Name="LabelDateAreIncorrect" IsVisible="false" FontSize="Small" Text="{i18n:Translate TheDateAreIncorrect}" TextColor="Red"/>
+							</StackLayout>
+						</StackLayout>
+						<StackLayout Spacing="6">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate NameOfBusiness}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<Entry x:Name="EntryNameBusiness" Placeholder="{i18n:Translate BusinessName}" FontSize="Medium" Margin="10, 0"/>
+							<Label x:Name="LabelAddressBusiness" FontSize="Medium" Margin="10, 0"/>
+						</StackLayout>
+						<Label x:Name="LabelProvideCommentErrand" Grid.Row="1" FontSize="Medium" Margin="10, 0, 10, 6"/>
+						<Editor x:Name="EntryProvideCommentErrand" FontSize="Medium" Margin="10, 0, 10, 6"/>
+					</StackLayout>
+				</ScrollView>
+			  </Grid>
+			  <Grid Grid.Row="1" x:Name="StackLayoutRestaurant" IsVisible="false" >
+				<ScrollView>
+					<StackLayout Orientation="Vertical">
+				    	<Label x:Name="LabelRestaurantScheduledService" Margin="10, 5" Text="{Binding Source={x:Reference thisPage}, Path=ScheduledService.Name}" FontSize="Large"/>
+						<StackLayout Orientation="Vertical" Padding="0, 0, 0, 5">
+							<StackLayout Spacing="6">
+								<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+									<Label FontSize="Small" Text="{i18n:Translate Restaurant}" TextColor="Black" FontAttributes="Bold"/>
+								</StackLayout>
+								<Label x:Name="LabelRestaurantName" FontSize="Medium" Margin="10, 0"/>
+								<Label x:Name="LabelRestaurantAddress" FontSize="Medium" Margin="10, 0"/>
+							</StackLayout>
+						</StackLayout>
+						<StackLayout Orientation="Vertical" Padding="0, 5">
+							<StackLayout Spacing="6">
+								<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+									<Label x:Name="LabelRestaurantServiceAddress" FontSize="Small" Text="{i18n:Translate ServiceAddress}" TextColor="Black" FontAttributes="Bold"/>
+								</StackLayout>
+								<Label x:Name="addressLabelRestaurant" FontSize="Medium" Margin="10, 0"/>
+							</StackLayout>
+							<StackLayout x:Name="StackLayoutRestaurantStatus" Spacing="6">
+								<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+									<Label FontSize="Small" Text="{i18n:Translate OrderStatus}" TextColor="Black" FontAttributes="Bold"/>
+								</StackLayout>
+								<Label x:Name="LabelRestaurantStatus" FontSize="Medium" Margin="10, 0"/>
+							</StackLayout>
+							<StackLayout Spacing="6" Orientation="Vertical">
+								<Grid ColumnSpacing="0" Padding="0, 6">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="3*"/>
+										<ColumnDefinition Width="4*"/>
+									</Grid.ColumnDefinitions>
+									<StackLayout Grid.Column="0" Orientation="Vertical">
+										<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+											<Label x:Name="LabelServiceRestaurantDateTitle" FontSize="Small" TextColor="Black" FontAttributes="Bold"/>
+										</StackLayout>
+										<Label x:Name="LabelServiceRestaurantDate" FontSize="Medium" Margin="10, 0, 5, 0"/>
+									</StackLayout>
+									<StackLayout Grid.Column="1" Orientation="Vertical">
+										<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+											<Label x:Name="LabelServiceRestaurantTimeTitle" FontSize="Small" TextColor="Black" FontAttributes="Bold"/>	
+										</StackLayout>
+										<Label x:Name="LabelServiceRestaurantTime" FontSize="Medium" Margin="10, 0, 10, 0"/>
+									</StackLayout>
+								</Grid>
+							</StackLayout>
+							<Grid ColumnSpacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="9*"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Label FontSize="Small" Text="{i18n:Translate MenuItem}" TextColor="Black" FontAttributes="Bold"/>
+								<Label Grid.Column="1" HorizontalOptions="End" FontSize="Small" Text="{i18n:Translate Qty}" TextColor="Black" FontAttributes="Bold"/>
+							</Grid>
+							<StackLayout Grid.Row="1" x:Name="StackLayoutCarts" Padding="10, 6">
+							</StackLayout>
+						</StackLayout>
+						<Label Margin="10, 0, 10, 5" x:Name="LabelRestaurantSpecialInstructions" Text="" FontSize="Small" TextColor="Black" VerticalOptions="Center"/>
+					</StackLayout>
+				</ScrollView>
+			  </Grid>
+			  <Grid Grid.Row="1" RowSpacing="0" x:Name="GridShopping" IsVisible="false">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<ScrollView Orientation="Vertical">
+					<StackLayout Orientation="Vertical">
+						<Label x:Name="LabelShoppingScheduledService" Margin="10, 5" Text="{Binding Source={x:Reference thisPage}, Path=ScheduledService.Name}" FontSize="Large"/>
+						<StackLayout Spacing="6" Padding="0, 5" Orientation="Vertical">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate ServiceDate}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<DatePicker x:Name="DatePickerServiceShopping" Margin="10, 0"/>
+							<Grid Margin="10, 0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="auto"/>
+								</Grid.ColumnDefinitions>
+								<Switch Grid.Column="1" x:Name="SwitchServiceWeeklyShopping" VerticalOptions="Center"></Switch>
+								<Label Grid.Column="0" Text="{i18n:Translate RepeatServiceWeekly}" FontSize="Small" HorizontalOptions="Fill" VerticalOptions="Center"/>
+							</Grid>
+						</StackLayout>
+						<StackLayout Spacing="6"  Padding="0, 5" Orientation="Vertical">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate StorePreferances}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<Picker x:Name="PickerStorePreferancesShopping" Margin="10, 0"/>
+						</StackLayout>
+						<StackLayout Spacing="6"  Padding="0, 5" Orientation="Vertical">
+							<StackLayout Spacing="0" Padding="10, 6" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label FontSize="Small" Text="{i18n:Translate SpecialInstructionsProvide}" TextColor="Black" FontAttributes="Bold"/>
+							</StackLayout>
+							<Label x:Name="LabelProvideCommentShopping" FontSize="Medium" Margin="13, 5, 10, 6"/>
+							<Editor x:Name="EntryProvideCommentShopping" FontSize="Medium" Margin="10, 0, 10, 6"/>						</StackLayout>
+						<StackLayout x:Name="StackLayoutShoppingItems" Spacing="0" Padding="0, 0" Orientation="Vertical" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" VerticalOptions="Start">
+						</StackLayout>
+					</StackLayout>
+				</ScrollView>
+				<Grid Grid.Row="1">
+					<Label Margin="0, 5" x:Name="LabelAddItemsShopping" FontSize="Medium" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" Text="{i18n:Translate AddItem}" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+				</Grid>
+			  </Grid>
+			  <Grid x:Name="GridUpdateShopping" Grid.Row="2" VerticalOptions="Start">
+				<Grid Margin="20, 20">
+					<local:GreenButton Grid.Column="0" x:Name="ButtonUpdateShopping" Text="{i18n:Translate Update}" HorizontalOptions="Fill" VerticalOptions="Center" />
+				</Grid>
+				<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		    </Grid>
+		  	<Grid Grid.Row="0" x:Name="GridEditCancel" IsVisible="false">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid Grid.Column="1" x:Name="GridCancelOrder" BackgroundColor="Transparent" Padding="4, 6, 4, 3">
+		    		<Label x:Name="LabelCancelOrder" TextColor="Red" Text="{i18n:Translate CancelOrder}" FontSize="Large"/>
+				</Grid>
+				<Grid Grid.Column="2" x:Name="GridEditOrder" BackgroundColor="Transparent" Padding="4, 6, 8, 3">
+		  	 	 	<Label x:Name="LabelEditOrder" TextColor="Green" Text="{i18n:Translate EditOrder}" FontSize="Large"/>
+				</Grid>
+			</Grid>
+		</Grid>
+		<local:ActivityIndicatorView
+                     IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

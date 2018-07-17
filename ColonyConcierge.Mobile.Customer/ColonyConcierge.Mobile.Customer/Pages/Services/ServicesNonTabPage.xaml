@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             Title="{i18n:Translate WelcomeMessage}"
+             x:Class="ColonyConcierge.Mobile.Customer.ServicesNonTabPage"
+             x:Name="thisPage">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition x:Name="RowDefinitionImageDoubleButton" Height="auto"/>
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid x:Name="GridServicesTab" IsVisible="true" BackgroundColor="#f00" VerticalOptions="FillAndExpand">
+			  <ListView x:Name="ListViewServices" BackgroundColor="White" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None"  VerticalOptions="FillAndExpand">
+			    <ListView.ItemTemplate>
+			      <DataTemplate>
+			        <local:CustomCell TransparentHover="true">
+			          <local:CustomCell.View>
+						<Grid Padding="10, 10">
+			                <Grid Padding="10,10" x:Name="GridItemServiceType" BackgroundColor="{Binding BackgroundColor}">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="auto"/>
+									</Grid.ColumnDefinitions>
+				                    <Label Text="{Binding DisplayType}" FontSize="Medium" Margin="0, 5" TextColor="#fff" VerticalOptions="Center"/>
+									<StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0">
+										<StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" Spacing="0">
+					                   		<Label Text="$" IsVisible="{Binding HasPrice}" HorizontalOptions="End" FontSize="Small" TextColor="#fff"/>
+					                   		<Label Text="{Binding PriceValue}" HorizontalOptions="End" FontSize="Small" TextColor="#fff"/>
+										</StackLayout>
+										<Label Text="{Binding PriceDescription}" HorizontalOptions="End" FontSize="Small" TextColor="#eee"/>
+									</StackLayout>
+								</Grid>
+			                </Grid>
+						</Grid>
+			          </local:CustomCell.View>
+			        </local:CustomCell>
+			      </DataTemplate>
+			    </ListView.ItemTemplate>
+			  </ListView>
+			  <local:ActivityIndicatorView
+			                     IsRunning="{Binding Source={x:Reference thisPage}, Path=IsLoadingToday}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsLoadingToday}"/>
+			</Grid>    
+
+			<Grid x:Name="GridScheduledTab" IsVisible="false">
+			  <ListView x:Name="ListViewScheduled" IsPullToRefreshEnabled="true" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None">
+			    <ListView.ItemTemplate>
+			      <DataTemplate>
+			        <ViewCell>
+			          <ViewCell.View>
+						<Grid>
+			                <Grid BackgroundColor="#fff" Padding="0, 15, 0, 15">
+			                  <Grid.ColumnDefinitions>
+			                    <ColumnDefinition Width="0.75*"/>
+			                    <ColumnDefinition Width="8.5*"/>
+			                    <ColumnDefinition Width="0.75*"/>
+<!--			                    <ColumnDefinition Width="auto"/>-->
+<!--			                    <ColumnDefinition Width="0.4*"/>-->
+			                  </Grid.ColumnDefinitions>
+			                  <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+			                    <Label Text="{Binding Name}" FontSize="Medium"/>
+								<StackLayout Orientation="Horizontal" Spacing="0">
+				                    <Label Text="{i18n:Translate ScheduledDate}" FontSize="Small"/>
+									<Label Text=": " FontSize="Small"/>
+				                    <Label Text="{Binding Model.ServiceDate, Converter={StaticResource simpleDateToStringConverter}}" FontSize="Small"/>
+								</StackLayout>
+								<StackLayout Orientation="Horizontal" Spacing="0" IsVisible="{Binding IsTimeShowed}">
+				                    <Label Text="{i18n:Translate ScheduledTime}" FontSize="Small"/>
+									<Label Text=": " FontSize="Small"/>
+									<Label Text="{Binding Time}" FontSize="Small"/>
+								</StackLayout>
+<!--								<StackLayout Orientation="Horizontal" Spacing="0" IsVisible="{Binding IsStatusShowed}">
+				                    <Label Text="{i18n:Translate Status}" FontSize="Small"/>
+									<Label Text=": " FontSize="Small"/>
+									<Label Text="{Binding Status}" FontSize="Small"/>
+								</StackLayout>-->
+			                  </StackLayout>
+<!--			                  <Image Grid.Column="3" Source="next.png" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False"/>-->
+			                </Grid>
+					  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="End" HorizontalOptions="Fill"/>
+						</Grid>
+			          </ViewCell.View>
+			        </ViewCell>
+			      </DataTemplate>
+			    </ListView.ItemTemplate>
+			  </ListView>
+			  <Image x:Name="ImageEmpty" IsVisible="false" Source="noscheduledservices.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Center" IsEnabled="false" Opacity="0.4"/>
+			  <local:ActivityIndicatorView
+			                     IsRunning="{Binding Source={x:Reference thisPage}, Path=IsLoadingScheduled}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsLoadingScheduled}"/>
+			</Grid>
+		</Grid>
+		<Grid x:Name="GridDoubleButton" Grid.Row="1" VerticalOptions="Fill"  HorizontalOptions="Fill" ColumnSpacing="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid x:Name="GridDouble" VerticalOptions="Center" HorizontalOptions="Fill" Grid.ColumnSpan="2" ColumnSpacing="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid x:Name="BackgroundServices" Grid.Column="0" BackgroundColor="#FCC438" HorizontalOptions="Fill" VerticalOptions="Fill" />
+				<Grid x:Name="BackgroundScheduled" Grid.Column="1" BackgroundColor="#43B02A" HorizontalOptions="Fill" VerticalOptions="Fill" />
+			</Grid>
+			
+			<Grid x:Name="ButtonServices" Grid.Column="0">				
+				<Label  TextColor="White" Text="{i18n:Translate Services}" HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+			</Grid>
+			<Grid x:Name="ButtonScheduled" Grid.Column="1">	
+				<Label TextColor="White" Text="{i18n:Translate Scheduled}" HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+			</Grid>
+		</Grid>
+	</Grid>
+</local:ContentPageBase>

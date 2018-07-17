@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColonyConcierge.Mobile.Customer.BrainTreePaymentMethodPage"
+	      xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	      xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+	      xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Name="thisPage"
+	      Title="{i18n:Translate PaymentMethodTitle}">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+			<x:Array x:Key="yesNo" Type = "{x:Type x:String}"> 
+		        <x:String>Yes</x:String> 
+		        <x:String>No</x:String>
+		    </x:Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+			<ScrollView Grid.Row="0">
+				 <StackLayout Padding="20,27,20,27" Orientation="Vertical">
+					<StackLayout.Spacing>
+		                <OnPlatform x:TypeArguments="x:Double" Android="6" iOS="12" />
+		            </StackLayout.Spacing>
+	               <StackLayout Orientation="Vertical" Spacing="0">
+	                    <StackLayout Orientation="Horizontal" Spacing="10">
+	                        <Entry Keyboard="Text" Placeholder="{i18n:Translate CardNickName}" x:Name="cardNickNameEntry" HorizontalOptions="FillAndExpand">
+	                            <Entry.Behaviors>
+									<local:RequiredValidator FieldName="{i18n:Translate CardNickName}"  x:Name="cardNickNameValidator" />
+	                            </Entry.Behaviors>
+	                        </Entry>
+	                    </StackLayout>
+	                    <Label IsVisible="true" Text="{Binding Source={x:Reference cardNickNameValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" Margin="0, 3, 0, 0"/>
+               		</StackLayout>
+				
+	                <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+	                    <StackLayout Orientation="Horizontal" Spacing="10">
+	                        <Entry Keyboard="Numeric" Placeholder="{i18n:Translate CardNumber}"  x:Name="creditCardNumberEntry" HorizontalOptions="FillAndExpand" >
+	                            <Entry.Behaviors>
+	                            </Entry.Behaviors>
+	                        </Entry>
+	                    </StackLayout>
+						<Label x:Name="LabelCreditCardNumberValidator" Text=" " FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+	                </StackLayout>
+				
+	                <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+	                    <StackLayout Orientation="Horizontal" Spacing="10">
+	                        <Entry Keyboard="Numeric" Placeholder="{i18n:Translate MMYYYY}" x:Name="EntryMMYY" HorizontalOptions="FillAndExpand" >
+	                            <Entry.Behaviors>
+									<local:RequiredValidator FieldName="{i18n:Translate MMYYYY}" x:Name="mmyyValidator" />
+	                            </Entry.Behaviors>
+	                        </Entry>
+	                    </StackLayout>
+						<Label x:Name="LabelMMYY" Text=" " FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+	                </StackLayout>
+
+	                <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+	                    <StackLayout Orientation="Horizontal" Spacing="10">
+	                        <Entry Keyboard="Numeric" Placeholder="{i18n:Translate CVV}" x:Name="EntryCvv" HorizontalOptions="FillAndExpand" >
+	                            <Entry.Behaviors>
+									<local:RequiredValidator FieldName="{i18n:Translate CVV}" MinLength="3"  x:Name="cvvValidator" />
+	                            </Entry.Behaviors>
+	                        </Entry>
+	                    </StackLayout>
+						<Label Grid.Row="1" Text="{Binding Source={x:Reference cvvValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+	                </StackLayout>
+				
+	                <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+	                    <StackLayout Orientation="Horizontal" Spacing="10">
+	                        <Entry Keyboard="Numeric"  Placeholder="{i18n:Translate PostalCode}" x:Name="EntryPostalCode" HorizontalOptions="FillAndExpand" >
+	                            <Entry.Behaviors>
+									<local:RequiredValidator FieldName="{i18n:Translate PostalCode}" MinLength = "1"  x:Name="postalCodeValidator" />
+	                            </Entry.Behaviors>
+	                        </Entry>
+	                    </StackLayout>
+						<Label Text="{Binding Source={x:Reference postalCodeValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+	                </StackLayout>
+					<local:CheckBoxCustom Margin="0,0,0,30" x:Name="CheckBoxIsPreferred" Checked="false" DefaultText="{i18n:Translate IsPreferred}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>	
+				</StackLayout>
+			</ScrollView>
+            <local:GreenButton x:Name = "AddButton" Margin="20,20,20,20" Text="{i18n:Translate AddPaymentMethod}" IsEnabled="false"
+                    Clicked="Button_Clicked" Grid.Row="1">
+            </local:GreenButton>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+			<local:ActivityIndicatorView Grid.RowSpan="2"
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+        </Grid>
+</local:ContentPageBase>

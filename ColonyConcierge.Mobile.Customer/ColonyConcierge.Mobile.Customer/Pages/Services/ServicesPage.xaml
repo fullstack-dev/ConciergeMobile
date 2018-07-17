@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColonyConcierge.Mobile.Customer.ServicesPage"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             Title="{i18n:Translate Services}"
+             BackgroundColor="#fff">
+    <Grid BackgroundColor="#f00" VerticalOptions="FillAndExpand">
+        <ListView x:Name="ListViewServices" BackgroundColor="White" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None"  VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:CustomCell TransparentHover="true">
+                        <local:CustomCell.View>
+                            <Grid Padding="10, 10">
+                                <Grid Padding="10,10" x:Name="GridItemServiceType" BackgroundColor="{Binding BackgroundColor}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding DisplayType}" FontSize="Medium" Margin="0, 5" TextColor="#fff" VerticalOptions="Center">
+                                        </Label>
+                                        <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" Spacing="0">
+                                                <Label Text="$" IsVisible="{Binding HasPrice}" HorizontalOptions="End" FontSize="Small" TextColor="#fff">
+                                                </Label>
+                                                <Label Text="{Binding PriceValue}" HorizontalOptions="End" FontSize="Small" TextColor="#fff">
+                                                </Label>
+                                            </StackLayout>
+                                            <Label Text="{Binding PriceDescription}" HorizontalOptions="End" FontSize="Small" TextColor="#eee">
+                                            </Label>
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </local:CustomCell.View>
+                    </local:CustomCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <local:ActivityIndicatorView x:Name="_activityIndicator"/>
+    </Grid>
+</ContentPage>

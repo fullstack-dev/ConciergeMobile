@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+		     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		     x:Class="ColonyConcierge.Mobile.Customer.ProfilePage"
+		     xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	         xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             x:Name="thisPage"
+	         Title="{i18n:Translate ProfilePageTitle}">
+	<Grid BackgroundColor="White" RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height = "Auto"/>
+			<RowDefinition Height = "*"/>
+		</Grid.RowDefinitions>
+		<Grid>
+             <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />		
+                  <RowDefinition Height ="Auto" />
+			 </Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Grid HorizontalOptions="Center" Padding ="12,15,12,0">
+				<StackLayout x:Name="StackLayoutProfile" Opacity="0" Orientation="Vertical" Spacing="0">
+					<StackLayout Orientation="Horizontal" Padding="0,6,0,3" HorizontalOptions="Center">
+						<Label FontAttributes="Bold" FontSize="Small" HorizontalOptions="Fill" x:Name="Name" TextColor="Black"/>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Padding="0,3,0,3" Spacing="0" HorizontalOptions="Center">
+						<Label Text="{i18n:Translate EmailInput}" Margin="0,0,3,0" FontSize="Small" HorizontalOptions="Fill"/>
+						<Label FontSize="Small" HorizontalOptions="Fill" x:Name="Email" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Padding="0,3,0,6" Spacing="0" HorizontalOptions="Center">
+						<Label Text="{i18n:Translate MobileInput}" Margin="0,0,3,0" FontSize="Small" HorizontalOptions="Fill"/>
+						<Label FontSize="Small" HorizontalOptions="Fill" x:Name="Phone"/>
+					</StackLayout>
+				</StackLayout>
+				<Grid HorizontalOptions="Center">	
+					<ActivityIndicator Color="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" WidthRequest="30" HeightRequest="30" x:Name="ActivityIndicatorProfile" IsVisible="true" IsRunning="true" HorizontalOptions="Center" VerticalOptions="Center"/>
+				</Grid>
+			</Grid>
+			<Label x:Name="EditButton" Grid.Row="1" Margin="0, 0, 0, 27" Text="{i18n:Translate Edit}" IsEnabled="true"
+					FontSize="Medium"
+					TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"
+                    BackgroundColor="Transparent" HorizontalOptions = "Center"/>
+	    </Grid>
+		<ListView  x:Name="lstView" RowHeight="50" Grid.Row = "1" 
+			       SeparatorColor="Transparent" SeparatorVisibility="None"
+				   Footer="{Binding Source={x:Reference thisPage}}"
+				   ItemsSource = "{Binding Source={x:Reference thisPage}, Path=Profiles}" HorizontalOptions = "FillAndExpand" 
+				   ItemSelected = "tappedListViewItem">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid>
+							<StackLayout Orientation="Horizontal">
+								<Image Margin ="10,0,0,0" Source="{Binding IconSource}" HeightRequest="24" HorizontalOptions="Fill"/>
+								<Label Text = "{Binding Name}" HorizontalOptions ="CenterAndExpand" VerticalOptions="Center"/>
+								<Image Source="arrow_right_gray.png" HeightRequest="24" HorizontalOptions="End"/>
+							</StackLayout>
+					  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+			<ListView.FooterTemplate>
+				<DataTemplate>
+					<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+				</DataTemplate>
+			</ListView.FooterTemplate>
+		</ListView>
+    	<local:ActivityIndicatorView Grid.RowSpan="2" IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}" />
+	</Grid>
+</local:ContentPageBase>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ColonyConcierge.Mobile.Customer.CartItemView"
+		xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" >
+	<ContentView.Content>
+		<StackLayout Orientation="Vertical">
+			<Grid ColumnSpacing="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="9*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="Fill">
+					<Label Text="{Binding DisplayName}" FontSize="Medium" TextColor="Black" VerticalOptions="Center"/>
+					<StackLayout Padding="10,0,10,0" x:Name="StackLayoutAppliedModifiers" Orientation="Vertical">
+					</StackLayout>
+					<Label x:Name="LabelSpecialInstructions" Margin="10,0,10,0" Text="{Binding SpecialInstructions}" FontSize="Medium" VerticalOptions="Center"/>
+				</StackLayout>
+				<Label Grid.Column="1" Text="{Binding Quantity}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="End" TextColor="Black" />
+			</Grid>
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>

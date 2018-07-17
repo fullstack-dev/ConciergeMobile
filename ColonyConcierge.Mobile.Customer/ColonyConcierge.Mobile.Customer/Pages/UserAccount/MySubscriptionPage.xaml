@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="ColonyConcierge.Mobile.Customer.MySubscriptionPage"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Name="thisPage"
+			 xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             Title="{i18n:Translate SubscriptionUpdateTitle}">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+            <local:AccountTypeToStringConverter x:Key="AccountConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<Grid>
+		<Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+	        <StackLayout Margin="20, 10">
+				<StackLayout Orientation="Vertical">
+					<Label Text="{i18n:Translate AccountType}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+					<Grid BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+				</StackLayout>
+				<ListView x:Name="ListViewSubscriptions" ItemsSource="{Binding Source={x:Reference thisPage}, Path=Plans}" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None">
+					<ListView.ItemTemplate>
+				    	<DataTemplate>
+	       					<local:CustomCell>
+								<StackLayout Orientation="Horizontal" Padding="0, 10" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent">
+									<xlabcontrols:CustomRadioButton x:Name="CustomRadioButtonDeliveryTab" Text="1" TextColor="Transparent" Checked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Center"/>
+									<StackLayout Orientation="Vertical" HorizontalOptions="Fill">
+										<Label FontAttributes="Bold" Text="{Binding DisplayName}" HorizontalOptions="Start" VerticalOptions="Center"/>
+										<Label Text="{Binding Description}" HorizontalOptions="Start" VerticalOptions="Center"/>
+									</StackLayout>
+								</StackLayout>
+							</local:CustomCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+	        </StackLayout>
+        	<Grid Grid.Row="1" Margin="20,20,20,20">
+            	<local:GreenButton x:Name="ButtonSave" Text="{i18n:Translate Save}" IsEnabled="true" Clicked="Button_Clicked" HorizontalOptions ="FillAndExpand" />
+			</Grid>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+	    </Grid>
+		<local:ActivityIndicatorView
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+	xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+    xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+	x:Class="ColonyConcierge.Mobile.Customer.RestaurantMenuItemModifierPage"
+	x:Name="thisPage"
+	NavigationPage.BackButtonTitle="{i18n:Translate Back}">
+	<ContentPage.Content>
+		<Grid>
+			<Grid>
+				<Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<ListView x:Name="ListViewModifiers" Header="{Binding Source={x:Reference thisPage}}" Grid.Row="0" HasUnevenRows="True" VerticalOptions="FillAndExpand" SeparatorColor="Transparent" SeparatorVisibility="None">
+					<x:Arguments>
+				        <ListViewCachingStrategy>
+				            <OnPlatform x:TypeArguments="ListViewCachingStrategy" Android="RecycleElement"/>
+				        </ListViewCachingStrategy>
+					</x:Arguments>
+					<ListView.HeaderTemplate>
+						<DataTemplate>
+							<StackLayout Orientation="Vertical">
+								<Grid Grid.Row="0" Padding="10,5,10,0" VerticalOptions="Start">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*"/>
+										<RowDefinition Height="auto"/>
+									</Grid.RowDefinitions>
+								<Grid Grid.Row="0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="auto" />
+									</Grid.ColumnDefinitions>
+									<Label Grid.Column="0" Text="{Binding MenuItemVM.MenuItem.DisplayName}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" FontAttributes="Bold" TextColor="#000" VerticalOptions="Center"/>
+									<Label Grid.Column="1" Text="{Binding DisplayPrice}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" FontAttributes="Bold" TextColor="#000" VerticalOptions="Center" />
+								</Grid>
+								<StackLayout Grid.Row="1">
+									<Label Text="{Binding MenuItemVM.MenuItem.DetailedDescription}" FontSize="Small" />
+								</StackLayout>
+								</Grid>
+								<Grid Grid.Row="1" Padding="10,5,10,10" VerticalOptions="FillAndExpand" ColumnSpacing="0">
+									<Grid.ColumnDefinitions>
+									    <ColumnDefinition Width="*"/>
+									    <ColumnDefinition Width="auto"/>
+									</Grid.ColumnDefinitions>
+									<Label Grid.Column="0" Text="{i18n:Translate Quantity}" FontSize="Small" FontAttributes="Bold" TextColor="#000" VerticalOptions="Center"/>
+									<local:NumberEntryView Grid.Column="1" HorizontalOptions="End"/>
+								</Grid>
+							</StackLayout>
+						</DataTemplate>
+					</ListView.HeaderTemplate>
+				    <ListView.ItemTemplate>
+					      <DataTemplate>
+							<local:CustomCell TransparentHover="true">
+								<Grid>
+									<Grid IsVisible="{Binding IsGroup}" BackgroundColor="{Binding GroupSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}">
+										<Label Grid.Column="0" Text="{Binding Title}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" FontAttributes="Bold" TextColor="Black" Margin="5"/>
+									</Grid>
+			                        <Grid IsVisible="{Binding IsItem}" Padding="10,10,5,10" VerticalOptions="FillAndExpand" x:Name="ModifierItemName">
+			                        	<Grid.ColumnDefinitions>
+										    <ColumnDefinition Width="auto"/>
+										    <ColumnDefinition Width="*"/>
+										    <ColumnDefinition Width="auto"/>
+									  	</Grid.ColumnDefinitions>
+										<Grid HeightRequest="22">
+											<Image HeightRequest="18" Aspect="AspectFit" Margin="3, 0" IsVisible="{Binding IsSelected}" Source="checkOrange.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+										</Grid>
+										<Grid Padding="0, 5, 0, 10" Grid.Column="1" VerticalOptions="Center" RowSpacing="0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="auto"/>
+												<ColumnDefinition Width="auto"/>
+											</Grid.ColumnDefinitions>
+											<StackLayout VerticalOptions="CenterAndExpand" Orientation="Vertical">
+												<Label VerticalOptions="Center" Text="{Binding MenuModifierVM.MenuModifier.DisplayName}" IsEnabled="{Binding IsEnabled}" FontSize="Small">
+													<Label.Triggers>
+													    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+													        <Setter Property="TextColor" Value="Black" />
+													    </Trigger>
+													    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+													        <Setter Property="TextColor" Value="Gray" />
+													    </Trigger>
+													</Label.Triggers>
+												</Label>
+												<Label VerticalOptions="Center" Text="{Binding MenuModifierVM.MenuModifier.DetailedDescription}" IsEnabled="{Binding IsEnabled}" IsVisible="{Binding IsShowDetail}" FontSize="Small" Margin="0, 5, 0, 0">
+													<Label.Triggers>
+													    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+													        <Setter Property="TextColor" Value="Black" />
+													    </Trigger>
+													    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+													        <Setter Property="TextColor" Value="Gray" />
+													    </Trigger>
+													</Label.Triggers>
+												</Label>
+												<Label VerticalOptions="FillAndExpand" Text="{Binding SubMenuModifierSelectedText}" IsEnabled="{Binding IsEnabled}" IsVisible="{Binding IsShowModifierSelectedText}" FontSize="Small" Margin="0, 0, 0, 0">
+													<Label.Triggers>
+													    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+													        <Setter Property="TextColor" Value="Gray" />
+													    </Trigger>
+													    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+													        <Setter Property="TextColor" Value="Gray" />
+													    </Trigger>
+													</Label.Triggers>
+												</Label>
+											</StackLayout>
+
+											<Label VerticalOptions="Center" Grid.Column="1" Text="{Binding Price}" IsEnabled="{Binding IsEnabled}" FontSize="Small" FontAttributes="Bold">
+												<Label.Triggers>
+												    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+												        <Setter Property="TextColor" Value="Black" />
+												    </Trigger>
+												    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+												        <Setter Property="TextColor" Value="Gray" />
+												    </Trigger>
+												</Label.Triggers>
+											</Label>
+											<Grid Grid.Column="2" HeightRequest="41">
+												<local:NumberEntryView  x:Name="ModifierNumberEntryViewQuantity" IsVisible="{Binding IsAllowMultipleInstances}" Padding="5, 0" VerticalOptions="Center"/>
+											</Grid>
+										</Grid>
+										<Image Source="arrow_right_gray.png"  HeightRequest="24" IsVisible="{Binding IsHaveSub}" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
+									</Grid>
+									<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+								</Grid>
+	                    	</local:CustomCell>			
+					      </DataTemplate>
+				    </ListView.ItemTemplate>
+					<ListView.FooterTemplate>
+						<DataTemplate>
+							<Grid>
+								<Grid Padding="10,5,10,5" VerticalOptions="FillAndExpand">
+				                	<Grid.ColumnDefinitions>
+									    <ColumnDefinition Width="*"/>
+									    <ColumnDefinition Width="auto"/>
+								    </Grid.ColumnDefinitions>
+									<Entry Text="{Binding Feedback, Mode=TwoWay}" Placeholder="{i18n:Translate NeedSpecialWithYourMeal}" FontSize="Small" />
+									<Button Command="{Binding FeedbackCommand}" Grid.Column="1" Text="+" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center" Margin="5, 0" IsVisible="False" />
+								</Grid>
+								<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+							</Grid>
+						</DataTemplate>
+					</ListView.FooterTemplate>
+				</ListView>
+				<StackLayout Grid.Row="1" Margin="20, 20" Orientation="Vertical" VerticalOptions="End">
+					<local:GreenButton x:Name="ButtonAddToCart" Text="{Binding Source={x:Reference thisPage}, Path=CartPriceText}" HorizontalOptions="Fill" VerticalOptions="Center" />
+				</StackLayout>
+<!--				<Grid Grid.Row="2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+-->				<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+			</Grid>
+<!--			<Grid x:Name="GridFeedback" BackgroundColor="#33333333" IsVisible="False">
+				<Grid VerticalOptions="Fill" BackgroundColor="White">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+					<Editor Grid.Column="0" VerticalOptions="Fill" HorizontalOptions="Fill" x:Name="EditorFeedback" Text="{Binding Source={x:Reference thisPage}, Path=Feedback, Mode=TwoWay}"/>
+					<local:GreenButton Grid.Column="1" Margin="0, 10" HorizontalOptions="Fill" x:Name="ButtonFeedbackDone" Text="{i18n:Translate Done}" VerticalOptions="Start"/>
+				</Grid>
+			</Grid>-->
+		    <local:ActivityIndicatorView 
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

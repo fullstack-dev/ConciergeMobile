@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+	xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+	x:Class="ColonyConcierge.Mobile.Customer.RestaurantMenuItemSubModifierPage">
+	<ContentPage.Content>
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<ListView x:Name="ListViewSubModifiers" Grid.Row="0" HasUnevenRows="True" VerticalOptions="FillAndExpand" SeparatorColor="Transparent" SeparatorVisibility="None">
+			<x:Arguments>
+			    <ListViewCachingStrategy>
+			        <OnPlatform x:TypeArguments="ListViewCachingStrategy" Android="RecycleElement"/>
+			    </ListViewCachingStrategy>
+			</x:Arguments>
+			<ListView.ItemTemplate>
+			      <DataTemplate>
+					<local:CustomCell TransparentHover="true">
+						<Grid>
+							<Grid IsVisible="{Binding IsGroup}" BackgroundColor="{Binding GroupSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}">
+								<Label Grid.Column="0" Text="{Binding Title}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" FontAttributes="Bold" TextColor="Black" Margin="5"/>
+							</Grid>
+							<Grid IsVisible="{Binding IsItem}" Padding="10,20,5,20">
+			                	<Grid.ColumnDefinitions>
+								    <ColumnDefinition Width="auto"/>
+								    <ColumnDefinition Width="*"/>
+								    <ColumnDefinition Width="auto"/>
+								    <ColumnDefinition Width="auto"/>
+							  	</Grid.ColumnDefinitions>
+								<Grid HeightRequest="22">
+									<Image HeightRequest="18" IsVisible="{Binding IsSelected}" Aspect="AspectFit" Margin="3, 0" Source="checkOrange.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+								</Grid>
+								<StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+									<Label Text="{Binding SubMenuModifierVM.MenuModifier.DisplayName}" IsEnabled="{Binding IsEnabled}" FontSize="Small" TextColor="#000" >
+										<Label.Triggers>
+										    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+										        <Setter Property="TextColor" Value="Black" />
+										    </Trigger>
+										    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+										        <Setter Property="TextColor" Value="Gray" />
+										    </Trigger>
+										</Label.Triggers>
+									</Label>
+									<Label Text="{Binding SubMenuModifierVM.MenuModifier.DetailedDescription}" IsEnabled="{Binding IsEnabled}" IsVisible="{Binding IsShowDetail}" FontSize="Small">
+											<Label.Triggers>
+										    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+										        <Setter Property="TextColor" Value="Black" />
+										    </Trigger>
+										    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+										        <Setter Property="TextColor" Value="Gray" />
+										    </Trigger>
+										</Label.Triggers>
+									</Label>
+								</StackLayout>
+								<Label Grid.Column="2" Text="{Binding Price}" IsEnabled="{Binding IsEnabled}" FontSize="Small" FontAttributes="Bold">
+									<Label.Triggers>
+									    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+									        <Setter Property="TextColor" Value="Black" />
+									    </Trigger>
+									    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+									        <Setter Property="TextColor" Value="Gray" />
+									    </Trigger>
+									</Label.Triggers>
+								</Label>
+								<Grid Grid.Column="3" IsVisible="{Binding IsAllowMultipleInstances}" HeightRequest="41">
+									<local:NumberEntryView IsVisible="{Binding IsAllowMultipleInstances}" Padding="5, 0" VerticalOptions="Center"/>
+								</Grid>
+							</Grid>
+							<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+						</Grid>
+			        </local:CustomCell>
+			      </DataTemplate>
+			    </ListView.ItemTemplate>
+			</ListView>
+			<StackLayout Grid.Row="1" Margin="20, 20" VerticalOptions="End">
+				<local:GreenButton x:Name="ButtonDone" Text="{i18n:Translate Done}" HorizontalOptions="Fill" VerticalOptions="Center" />
+			</StackLayout>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

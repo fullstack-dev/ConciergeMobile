@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+			x:Class="ColonyConcierge.Mobile.Customer.AddOrEditItemShoppingPage"
+			x:Name="thisPage"
+			Title="{i18n:Translate AddItem}">
+	<Grid>
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<ScrollView Grid.Row="0" Orientation="Vertical">
+				<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Spacing="6">
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate BrandTitle}" TextColor="Gray"/>
+							<Entry  x:Name="EntryBrand" Text="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.Product.Brand}" Placeholder="{i18n:Translate BrandField}" FontSize="Medium" Margin="0, 0" />
+						</StackLayout>
+					</Grid>
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate ProductNameTitle}" TextColor="Gray"/>
+							<Entry x:Name="EntryProductName" Text="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.Product.Name}" Placeholder="{i18n:Translate ProductNameField}" FontSize="Medium" Margin="0, 0">
+	                           <Entry.Behaviors>
+									<local:RequiredValidator FieldName="{i18n:Translate ProductNameField}"  x:Name="productNameValidator" MinLength="1" />
+	                            </Entry.Behaviors>
+							</Entry>
+						</StackLayout>
+					</Grid>
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate ProductSizeWeightTitle}" TextColor="Gray"/>
+							<Entry x:Name="EntryProductSizeWeight" Text="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.Product.Size}" Placeholder="{i18n:Translate SizeWeightField}" FontSize="Medium" Margin="0, 0">
+								<Entry.Behaviors>
+									<local:RequiredValidator FieldName="{i18n:Translate SizeWeightField}"  x:Name="sizeWeightValidator" MinLength="1" />
+	                            </Entry.Behaviors>
+							</Entry>
+						</StackLayout>
+					</Grid>
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate QuanlityField}" TextColor="Gray"/>
+							<Entry x:Name="EntryQuanlity" Keyboard="Numeric" Text="{Binding Source={x:Reference thisPage}, Path=Quantity}" Placeholder="{i18n:Translate QuanlityField}" FontSize="Medium" Margin="0, 0">
+								<Entry.Behaviors>
+									<local:RequiredNumberValidator FieldName="{i18n:Translate QuanlityField}"  x:Name="quanlityFieldValidator" MinValue="1" />
+	                            </Entry.Behaviors>
+							</Entry>
+						</StackLayout>
+					</Grid>
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate ItemPreferancesTitle}" TextColor="Gray"/>
+							<StackLayout Orientation="Vertical" Spacing="6">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="auto"/>
+									</Grid.ColumnDefinitions>
+									<Switch Grid.Column="1" IsToggled="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.BrandSubstitution}" Margin = "0,0,10,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+	                           		<Label Grid.Column="0" Text="{i18n:Translate BrandSubstitution}" FontSize="Medium" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+								</Grid>
+							</StackLayout>
+							<StackLayout Orientation="Vertical" Spacing="6">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="auto"/>
+									</Grid.ColumnDefinitions>
+									<Switch Grid.Column="1" IsToggled="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.Generic}" Margin = "0,0,10,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+	                                <Label Grid.Column="0" Text="{i18n:Translate GenericSubstitution}" FontSize="Medium" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+								</Grid>
+							</StackLayout>
+							<Label FontSize="Large" Text="{i18n:Translate SizeWeightSubstitution}" TextColor="Gray" Margin="0,12,0,0"/>
+							<StackLayout Orientation="Vertical" Spacing="6">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition></ColumnDefinition>
+										<ColumnDefinition></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<StackLayout Grid.Column="0" Orientation="Horizontal">
+										<Switch IsToggled="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.AllowLargerSize}" Margin = "0,0,10,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+										<Label  Text="{i18n:Translate Larger}" FontSize="Medium" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+									</StackLayout>
+									<StackLayout Grid.Column="1" Orientation="Horizontal">
+										<Switch IsToggled="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.AllowSmallerSize}" Margin = "0,0,10,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+										<Label  Text="{i18n:Translate Smaller}" FontSize="Medium" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+									</StackLayout>
+								</Grid>
+							</StackLayout>
+						</StackLayout>
+					</Grid>
+
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout Spacing="6" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+							<Label FontSize="Large" Text="{i18n:Translate ProductComments}" TextColor="Gray"/>
+							<Grid HorizontalOptions="Fill" ColumnSpacing="8">
+								<Grid>
+									<Editor Text="{Binding Source={x:Reference thisPage}, Path=ShoppingListItem.Note}" HeightRequest="80" x:Name="EntryProvideComment" FontSize="Medium" VerticalOptions="Start"/>
+									<Label x:Name="LabelProvideComment" IsEnabled="false" Text="{i18n:Translate ProvideComment}" TextColor="Gray" FontSize="Medium" Margin="2, 9, 2, 0" HorizontalOptions="Start" VerticalOptions="Start"/>
+								</Grid>
+							</Grid>
+						</StackLayout>
+					</Grid>
+				</StackLayout>
+			</ScrollView>
+			<StackLayout Grid.Row="1" Margin="20, 20" Orientation="Vertical" VerticalOptions="End">
+				<local:GreenButton x:Name="ButtonAddItem" IsEnabled="False" Text="{i18n:Translate AddItem}" HorizontalOptions="Fill" VerticalOptions="Center" >
+                	<local:GreenButton.Triggers>
+		                <MultiTrigger TargetType="local:GreenButton">
+		                    <MultiTrigger.Conditions>
+		                        <BindingCondition Binding="{Binding Source={x:Reference productNameValidator}, Path=IsValid}" Value="True" />
+		                        <BindingCondition Binding="{Binding Source={x:Reference sizeWeightValidator}, Path=IsValid}" Value="True" />
+		                        <BindingCondition Binding="{Binding Source={x:Reference quanlityFieldValidator}, Path=IsValid}" Value="True" />
+		                    </MultiTrigger.Conditions>
+		                    <Setter Property="IsEnabled" Value="True"/>
+		                </MultiTrigger>
+		            </local:GreenButton.Triggers>
+				</local:GreenButton>
+			</StackLayout>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+		<local:ActivityIndicatorView 
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

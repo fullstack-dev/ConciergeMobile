@@ -1,0 +1,1 @@
+JSAPIStringGenerator.exe ..\..\..\..\Server\ColonyConcierge.API\bin\Release\ColonyConcierge.API.dll >EndPoints.js

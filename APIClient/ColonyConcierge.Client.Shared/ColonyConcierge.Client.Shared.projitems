@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>d1480490-9542-4f95-841f-2b316d65131d</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ColonyConcierge.Client.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ContractResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSONDeserializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSONSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestImpl\RestClientImpl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestImpl\RestParameterImpl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestImpl\RestRequestImpl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestImpl\RestResponseImpl.cs" />
+  </ItemGroup>
+</Project>

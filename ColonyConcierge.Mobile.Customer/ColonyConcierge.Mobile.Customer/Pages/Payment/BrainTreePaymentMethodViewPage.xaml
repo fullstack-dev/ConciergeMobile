@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColonyConcierge.Mobile.Customer.BrainTreePaymentMethodViewPage"
+	      	 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	         xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+	     	 xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+        	 x:Name="thisPage">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+			<x:Array x:Key="yesNo" Type = "{x:Type x:String}"> 
+		        <x:String>Yes</x:String> 
+		        <x:String>No</x:String>
+		    </x:Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+        <Grid>
+			<Grid>
+				<ScrollView Grid.Row="0">
+					 <StackLayout Margin="20,24,20,18" Orientation="Vertical">
+			            <StackLayout.Spacing>
+			                <OnPlatform x:TypeArguments="x:Double" iOS="18" Android="18"/>
+			            </StackLayout.Spacing>
+			           <Grid RowSpacing="0">
+		                    <StackLayout Orientation="Vertical" Spacing="3">
+								<Label Text="{i18n:Translate CardNickName}" TextColor="Gray" HorizontalOptions="FillAndExpand"/>
+			                    <Label x:Name="LabelCardNickName" TextColor="Black" FontSize="Small" HorizontalOptions="FillAndExpand" Margin="0, 3, 0, 0">
+								</Label>
+							</StackLayout>
+						</Grid>
+		               <Grid RowSpacing="0">
+		                    <StackLayout Orientation="Vertical" Spacing="3">
+								<Label Text="{i18n:Translate CardNumber}" TextColor="Gray" HorizontalOptions="FillAndExpand"/>
+			                    <Label x:Name="LabelCreditCardNumber" TextColor="Black" FontSize="Small" HorizontalOptions="FillAndExpand" Margin="0, 3, 0, 0">
+								</Label>
+							</StackLayout>
+						</Grid>
+		               <Grid RowSpacing="0">
+		                    <StackLayout Orientation="Vertical" Spacing="3">
+								<Label Text="{i18n:Translate ExpiryDate}" TextColor="Gray" HorizontalOptions="FillAndExpand"/>
+			                    <Label x:Name="LabelExpiryDate" TextColor="Black" FontSize="Small" HorizontalOptions="FillAndExpand" Margin="0, 3, 0, 0">
+								</Label>
+							</StackLayout>
+					   </Grid>
+		               <Grid RowSpacing="0">
+		                    <StackLayout Orientation="Vertical" Spacing="3">
+								<Label Text="{i18n:Translate Preferred}" TextColor="Gray" HorizontalOptions="FillAndExpand"/>
+			                    <Label x:Name="LabelPreferred" TextColor="Black" FontSize="Small" HorizontalOptions="FillAndExpand" Margin="0, 3, 0, 0">
+								</Label>
+							</StackLayout>
+						</Grid>
+					</StackLayout>
+				</ScrollView>
+			</Grid>
+    		<local:ActivityIndicatorView IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}" />	
+        </Grid>
+</local:ContentPageBase>

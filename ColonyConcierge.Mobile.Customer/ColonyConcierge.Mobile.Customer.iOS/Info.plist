@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>MinimumOSVersion</key>
+	<string>8.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>AsystYou</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.colonyconcierge.asystyou.ios</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleName</key>
+	<string>AsystYou</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads </key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>AsystYou uses your location to determine services available in your area.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>AsystYou will only upload and share videos you choose.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>AsystYou will only upload and share photos you choose.</string>
+	<key>UIStatusBarTintParameters</key>
+	<dict>
+		<key>UINavigationBar</key>
+		<dict>
+			<key>Style</key>
+			<string>UIBarStyleDefault</string>
+			<key>Translucent</key>
+			<false/>
+			<key>TintColor</key>
+			<dict>
+				<key>Red</key>
+				<real>0.262745098039216</real>
+				<key>Green</key>
+				<real>0.690196078431373</real>
+				<key>Blue</key>
+				<real>0.164705882352941</real>
+			</dict>
+		</dict>
+	</dict>
+	<key>UIStatusBarStyle</key>
+	<string>Blue</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>Custom Property</key>
+	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Montserrat-Regular.ttf</string>
+		<string>Fonts/Montserrat-Bold.ttf</string>
+		<string>Fonts/Montserrat-Italic.ttf</string>
+	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>1.3.1</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>12</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.colonyconcierge.asystyou.ios</string>
+			<key>CFBundleURLTypes</key>
+			<string>Viewer</string>
+			<key>CFBundleURLIconFile</key>
+			<string>Smiley58x58@1x</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>asystyou</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

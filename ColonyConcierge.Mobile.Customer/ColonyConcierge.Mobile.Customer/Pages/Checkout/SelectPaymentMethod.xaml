@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ColonyConcierge.Mobile.Customer.SelectPaymentMethod"
+		xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+		xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+		x:Name="thisPage"
+		Title="{i18n:Translate Payment}">
+	<ContentPage.Content>
+		<Grid>
+			<Grid RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8" VerticalOptions="Start">
+					<StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+						<Label FontSize="Large" Text="{i18n:Translate MyPaymentMethod}" TextColor="Gray"/>
+						<Grid ColumnSpacing="0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="auto"/>
+							</Grid.ColumnDefinitions>
+							<ffimageloading:CachedImage 
+									Grid.Column="0"
+									WidthRequest="36"
+									DownsampleToViewSize="true"
+									VerticalOptions="Center"
+									CacheType="All"
+									Margin="6,0,12,0"
+									Aspect="AspectFit"
+									IsVisible="false"
+									x:Name="CachedImageCard">
+							</ffimageloading:CachedImage>
+							<StackLayout Grid.Column="1" Orientation="Vertical" Spacing="3">
+								<Label x:Name="LabelCardName" FontSize="Small" />
+								<Label x:Name="LabelCardNumber" FontSize="Small" />
+							</StackLayout>
+							<StackLayout x:Name="StackLayoutChangeCard" Orientation="Horizontal" Grid.Column="2" VerticalOptions="Fill" Padding="6">
+								<Label TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" Text="{i18n:Translate Change}" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="Center"/>
+							</StackLayout>
+						</Grid>
+					</StackLayout>
+				</Grid>
+				<Grid Grid.Row="1" VerticalOptions="End" Margin="20, 20" RowSpacing="0" ColumnSpacing="0">
+					<local:OrangeButton x:Name="ButtonCheckout" Text="{i18n:Translate PlaceOrder}" HorizontalOptions="Fill" VerticalOptions="Center" />
+				</Grid>
+				<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+			</Grid>
+	        <local:ActivityIndicatorView IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}" />
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

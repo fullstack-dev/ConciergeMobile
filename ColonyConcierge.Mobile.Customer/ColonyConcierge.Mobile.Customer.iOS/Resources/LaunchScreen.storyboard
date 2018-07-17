@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gAE-YM-kbH">
+            <objects>
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VvZ-Rw-yqe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="asystyou_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
+                                        <rect key="frame" x="32" y="200" width="256" height="100"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="23" firstAttribute="centerY" secondItem="VvZ-Rw-yqe" secondAttribute="centerY" id="2s4-fw-spm"/>
+                                    <constraint firstItem="23" firstAttribute="width" secondItem="VvZ-Rw-yqe" secondAttribute="width" multiplier="0.8" id="bgl-Wq-arJ"/>
+                                    <constraint firstItem="23" firstAttribute="centerX" secondItem="VvZ-Rw-yqe" secondAttribute="centerX" id="wPk-Ie-GOB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VvZ-Rw-yqe" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="1hI-80-BwH"/>
+                            <constraint firstItem="VvZ-Rw-yqe" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="6ZN-p8-DqI"/>
+                            <constraint firstItem="VvZ-Rw-yqe" firstAttribute="height" secondItem="yd7-JS-zBw" secondAttribute="height" id="9ci-P9-oaZ"/>
+                            <constraint firstItem="VvZ-Rw-yqe" firstAttribute="width" secondItem="yd7-JS-zBw" secondAttribute="width" id="eAP-v2-qmC"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="500"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="339"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="asystyou_logo.png" width="318" height="100"/>
+    </resources>
+</document>

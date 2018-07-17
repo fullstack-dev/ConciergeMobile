@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="splash_background">#F2C418</color>
+	<color name="colorPrimary">#43b02a</color>
+	<color name="colorPrimaryDark">#41AF49</color>
+
+	<!--<color name="refresh_progress_1">#43b02a</color>
+	<color name="refresh_progress_2">#43b02a</color>
+	<color name="refresh_progress_3">#43b02a</color>-->
+</resources>

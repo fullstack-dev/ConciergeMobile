@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="ColonyConcierge.Mobile.Customer.SecurityQuestionPage"
+             x:Name="thisPage"
+             Title="{i18n:Translate SignUp}">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+		<ScrollView>
+		    <StackLayout Padding="20, 27, 20, 45" Orientation="Vertical" Spacing="0" VerticalOptions="StartAndExpand">
+				<StackLayout.Spacing>
+	           		 <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+	           	</StackLayout.Spacing>
+				
+		        <StackLayout Margin="0" Orientation="Vertical">
+		             <StackLayout.Spacing>
+		           		 <OnPlatform x:TypeArguments="x:Double" iOS="6" Android="0"/>
+		           	 </StackLayout.Spacing>
+					 <StackLayout Margin="0,0,0,6" Orientation="Vertical">
+						<Label Text="{i18n:Translate SecurityQuestion}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+						<Grid BackgroundColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+					</StackLayout>
+				</StackLayout>
+				
+				<StackLayout Orientation="Vertical" Spacing="0">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+				    <StackLayout Orientation="Horizontal" Spacing="10">
+				        <Image Source="key.png" WidthRequest="24" />
+				        <local:NoSuggestionEntry Placeholder="{i18n:Translate SecurityQuestion}" x:Name="questionEntry"
+				               HorizontalOptions="FillAndExpand"
+				               Text="{Binding SecurityQuestions[0]}">
+				            <Entry.Behaviors>
+				                <local:RequiredValidator x:Name="questionValidator"/>
+				            </Entry.Behaviors>
+				        </local:NoSuggestionEntry>
+				    </StackLayout>
+				    <Label Text="{Binding Source={x:Reference questionValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+				
+				<StackLayout Orientation="Vertical" Spacing="0">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+				    <StackLayout Orientation="Horizontal" Spacing="10">
+				        <Image Source="key.png" WidthRequest="24" />
+				        <local:NoSuggestionEntry Placeholder="{i18n:Translate SecurityAnswer}" Text="{Binding SecurityAnswers[0]}"
+				               HorizontalOptions="FillAndExpand"
+				               x:Name="securityAnswerEntry">
+				            <Entry.Behaviors>
+				                <local:RequiredValidator x:Name="answerValidator" MinLength="10" FieldName="{i18n:Translate SecurityAnswer}" />
+				            </Entry.Behaviors>
+				        </local:NoSuggestionEntry>
+				    </StackLayout>
+				    <Label Text="{Binding Source={x:Reference answerValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+				
+		        <StackLayout Grid.Row="1" Spacing="0">
+					<StackLayout Orientation="Vertical">
+							<local:LabelHtml Margin="30,10,30,10" x:Name="TermsButton" HorizontalOptions ="FillAndExpand" >
+							</local:LabelHtml>
+					</StackLayout>
+		        </StackLayout> 
+		    </StackLayout>
+		</ScrollView>
+		<StackLayout Grid.Row="1" Orientation="Horizontal">
+        	<local:OrangeButton Margin="20,20,20,20" Text="{i18n:Translate CreateAccount}" IsEnabled="False" Clicked="ButtonCreate_Clicked" HorizontalOptions ="FillAndExpand">
+				<local:OrangeButton.Triggers>
+                    <MultiTrigger TargetType="local:OrangeButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Source={x:Reference questionValidator}, Path=IsValid}" Value="True" />
+							<BindingCondition Binding="{Binding Source={x:Reference answerValidator}, Path=IsValid}" Value="True" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True" />
+                    </MultiTrigger>
+                </local:OrangeButton.Triggers>
+			</local:OrangeButton>
+		</StackLayout>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

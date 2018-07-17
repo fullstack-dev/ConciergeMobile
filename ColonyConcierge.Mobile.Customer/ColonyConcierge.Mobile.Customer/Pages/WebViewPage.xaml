@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+ 	xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	x:Class="ColonyConcierge.Mobile.Customer.WebViewPage"
+	x:Name="thisPage">
+
+	<ContentPage.Content>
+		<Grid>
+			<StackLayout x:Name="StackLayoutBrowser" Orientation="Vertical" VerticalOptions="FillAndExpand">
+				<WebView x:Name="Browser" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+			</StackLayout>
+			<local:ActivityIndicatorView
+                     IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

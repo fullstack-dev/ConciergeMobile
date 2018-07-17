@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B5324CBA-5C2F-42AE-B464-CEB8861959C6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ColonyConcierge.APIData</RootNamespace>
+    <AssemblyName>ColonyConcierge.APIData</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Debug\ColonyConcierge.APIData.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Development\</OutputPath>
+    <DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE;STAGING</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>TRACE;TEST</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>1591</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\AccountHistoryEntry.cs" />
+    <Compile Include="Data\Address.cs" />
+    <Compile Include="Data\BankAccountData.cs" />
+    <Compile Include="Data\BinaryFile.cs" />
+    <Compile Include="Data\BusinessRevenueReportData.cs" />
+    <Compile Include="Data\CalculatedServiceFee.cs" />
+    <Compile Include="Data\CalculatedServiceFeeLineItem.cs" />
+    <Compile Include="Data\ClientVersioningInfo.cs" />
+    <Compile Include="Data\Coupon.cs" />
+    <Compile Include="Data\CreditCardData.cs" />
+    <Compile Include="Data\CustomerUserLevel.cs" />
+    <Compile Include="Data\CustomRestaurantOrderRequest.cs" />
+    <Compile Include="Data\DataResult.cs" />
+    <Compile Include="Data\ErrorObject.cs" />
+    <Compile Include="Data\ExtendedAddress.cs" />
+    <Compile Include="Data\GeoConvexShape.cs" />
+    <Compile Include="Data\GeoFence.cs" />
+    <Compile Include="Data\GeoOptPoint.cs" />
+    <Compile Include="Data\GeoPoint.cs" />
+    <Compile Include="Data\GeoShape.cs" />
+    <Compile Include="Data\GroupedDeliveryDestination.cs" />
+    <Compile Include="Data\HandymanCharge.cs" />
+    <Compile Include="Data\InheritedTypeBase.cs" />
+    <Compile Include="Data\Invoice.cs" />
+    <Compile Include="Data\InvoiceLineItem.cs" />
+    <Compile Include="Data\IUrlFormatable.cs" />
+    <Compile Include="Data\Logistics\JobDetailLineItem.cs" />
+    <Compile Include="Data\LoginResult.cs" />
+    <Compile Include="Data\Logistics\AllocatedScheduleSlot.cs" />
+    <Compile Include="Data\Logistics\Job.cs" />
+    <Compile Include="Data\Logistics\JobCompletionData.cs" />
+    <Compile Include="Data\Logistics\JobDetails.cs" />
+    <Compile Include="Data\Logistics\JobHistoryEntry.cs" />
+    <Compile Include="Data\Logistics\JobManagementData.cs" />
+    <Compile Include="Data\Logistics\NotificationData\LogisticsNotification.cs" />
+    <Compile Include="Data\Logistics\NotificationData\NotificationKind.cs" />
+    <Compile Include="Data\Logistics\ScheduleEntry.cs" />
+    <Compile Include="Data\Logistics\ScheduleGroupHoliday.cs" />
+    <Compile Include="Data\Logistics\ScheduleSlot.cs" />
+    <Compile Include="Data\Logistics\ScheduleGroup.cs" />
+    <Compile Include="Data\Logistics\WorkerClockInInfo.cs" />
+    <Compile Include="Data\Logistics\WorkerManagementInfo.cs" />
+    <Compile Include="Data\LostPasswordData.cs" />
+    <Compile Include="Data\Message.cs" />
+    <Compile Include="Data\MessageIDList.cs" />
+    <Compile Include="Data\NewsItem.cs" />
+    <Compile Include="Data\Note.cs" />
+    <Compile Include="Data\NotificationRecipientInformation.cs" />
+    <Compile Include="Data\Payment.cs" />
+    <Compile Include="Data\PaymentAccountData.cs" />
+    <Compile Include="Data\PendingDiscount.cs" />
+    <Compile Include="Data\PersonalServiceData.cs" />
+    <Compile Include="Data\PersonalServiceLaundryData.cs" />
+    <Compile Include="Data\PersonalServiceWaitingData.cs" />
+    <Compile Include="Data\PhoneNumber.cs" />
+    <Compile Include="Data\PlaceHolderDummy.cs" />
+    <Compile Include="Data\Promotion.cs" />
+    <Compile Include="Data\RegistrationEntry.cs" />
+    <Compile Include="Data\Restaurant.cs" />
+    <Compile Include="Data\RestaurantCategory.cs" />
+    <Compile Include="Data\RestaurantLocation.cs" />
+    <Compile Include="Data\RestaurantLocationHoliday.cs" />
+    <Compile Include="Data\RestaurantLocation_Admin.cs" />
+    <Compile Include="Data\RestaurantSearchResultData.cs" />
+    <Compile Include="Data\Restaurant_Admin.cs" />
+    <Compile Include="Data\Result.cs" />
+    <Compile Include="Data\RMenu.cs" />
+    <Compile Include="Data\RMenuGroup.cs" />
+    <Compile Include="Data\RMenuGroup_Admin.cs" />
+    <Compile Include="Data\RMenuItem.cs" />
+    <Compile Include="Data\RMenuItemCombinationData.cs" />
+    <Compile Include="Data\RMenuItemCombinationSlot.cs" />
+    <Compile Include="Data\RMenuItemPriceTable.cs" />
+    <Compile Include="Data\RMenuItem_Admin.cs" />
+    <Compile Include="Data\RMenuModifier.cs" />
+    <Compile Include="Data\RMenuModifierGroup.cs" />
+    <Compile Include="Data\RMenuModifierGroup_Admin.cs" />
+    <Compile Include="Data\RMenuModifierPrice.cs" />
+    <Compile Include="Data\RMenuModifierPrice_Admin.cs" />
+    <Compile Include="Data\RMenuModifier_Admin.cs" />
+    <Compile Include="Data\RMenuOrderingAvailableSlot.cs" />
+    <Compile Include="Data\RMenuTag.cs" />
+    <Compile Include="Data\RMenu_Admin.cs" />
+    <Compile Include="Data\ScheduledErrand.cs" />
+    <Compile Include="Data\ScheduledErrandCharges.cs" />
+    <Compile Include="Data\ScheduledMealCharges.cs" />
+    <Compile Include="Data\ScheduledPersonalService.cs" />
+    <Compile Include="Data\ScheduledPersonalServiceCharges.cs" />
+    <Compile Include="Data\ScheduledRestaurantService.cs" />
+    <Compile Include="Data\ScheduledRestaurantServiceChargeItem.cs" />
+    <Compile Include="Data\ScheduledRestaurantServiceCharges.cs" />
+    <Compile Include="Data\BusinessScheduledService.cs" />
+    <Compile Include="Data\ScheduledRMenuItem.cs" />
+    <Compile Include="Data\ScheduledRMenuItemCombination.cs" />
+    <Compile Include="Data\ScheduledRMenuItemComboSelection.cs" />
+    <Compile Include="Data\ScheduledRMenuItemModifier.cs" />
+    <Compile Include="Data\ScheduledService.cs" />
+    <Compile Include="Data\ScheduledServiceCharges.cs" />
+    <Compile Include="Data\ScheduledServiceDispatchAssignment.cs" />
+    <Compile Include="Data\ScheduledServiceMutability.cs" />
+    <Compile Include="Data\ScheduledShopping.cs" />
+    <Compile Include="Data\ScheduledShoppingChargeItem.cs" />
+    <Compile Include="Data\ScheduledShoppingCharges.cs" />
+    <Compile Include="Data\ScheduledSpecialRequest.cs" />
+    <Compile Include="Data\ScheduledSpecialRequestChargeItem.cs" />
+    <Compile Include="Data\ScheduledSpecialRequestCharges.cs" />
+    <Compile Include="Data\SecurityAnswerCheckResult.cs" />
+    <Compile Include="Data\SecurityQuestion.cs" />
+    <Compile Include="Data\RestaurantServiceSummary.cs" />
+    <Compile Include="Data\State.cs" />
+    <Compile Include="Data\ServiceGroups.cs" />
+    <Compile Include="Data\Service.cs" />
+    <Compile Include="Data\ServiceCalendar.cs" />
+    <Compile Include="Data\ServiceDaysOfWeek.cs" />
+    <Compile Include="Data\ServiceFeePrice.cs" />
+    <Compile Include="Data\ServiceHistoryEntry.cs" />
+    <Compile Include="Data\ServiceHolidayDate.cs" />
+    <Compile Include="Data\ServiceKindCodes.cs" />
+    <Compile Include="Data\ServiceTypes.cs" />
+    <Compile Include="Data\ShoppingList.cs" />
+    <Compile Include="Data\ShoppingListItem.cs" />
+    <Compile Include="Data\ShoppingPreference.cs" />
+    <Compile Include="Data\ShoppingProduct.cs" />
+    <Compile Include="Data\ShoppingStore.cs" />
+    <Compile Include="Data\SimpleDate.cs" />
+    <Compile Include="Data\SubscriptionPlan.cs" />
+    <Compile Include="Data\TaxRate.cs" />
+    <Compile Include="Data\TimeOfDay.cs" />
+    <Compile Include="Data\TimeStamp.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="Data\UserQuickInfo.cs" />
+    <Compile Include="Data\UserRole.cs" />
+    <Compile Include="Data\WorkerRegistrationData.cs" />
+    <Compile Include="Metadata\CommonRequestHeaders.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

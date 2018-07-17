@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+			x:Class="ColonyConcierge.Mobile.Customer.SpecialRequestPage"
+			x:Name="thisPage"
+			Title="{i18n:Translate SpecialRequest}">
+	<Grid>
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<ScrollView Grid.Row="0" Orientation="Vertical">
+				<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Spacing="6">
+					<StackLayout Spacing="0" Margin="10, 8">
+						<Label FontSize="Medium" Text="{i18n:Translate SpecialRequest}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+					</StackLayout>
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+							<Label FontSize="Large" Text="{i18n:Translate ServiceAddress}" TextColor="Gray"/>
+							<Grid HorizontalOptions="Fill">
+								<local:AddressEntry x:Name="addressEntry" Placeholder="{i18n:Translate ServiceAddress}" ParenntPage="{x:Reference thisPage}" FontSize="Medium" />
+							</Grid>
+							<Entry x:Name="apartmentUnitEntry" Placeholder="{i18n:Translate ApartmentUnit}" FontSize="Medium" />
+						</StackLayout>
+					</Grid>
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+							<Label FontSize="Large" Text="{i18n:Translate ServiceDate}" TextColor="Gray"/>
+							<Grid ColumnSpacing="6" HorizontalOptions="Fill">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image Grid.Column="0" HeightRequest="24" Source="calendar.png" VerticalOptions="Center"/>
+								<DatePicker Grid.Column="1" x:Name="DatePickerService" VerticalOptions="Center" HorizontalOptions="Fill"/>
+							</Grid>
+						</StackLayout>
+					</Grid>
+
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout Spacing="6" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+							<Label FontSize="Large" Text="{i18n:Translate SpecialInstructionsProvide}" TextColor="Gray"/>
+							<Grid HorizontalOptions="Fill" ColumnSpacing="8">
+								<Grid>
+									<Editor HeightRequest="80" x:Name="EntryProvideComment" FontSize="Medium" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+									<Label x:Name="LabelProvideComment" IsEnabled="false" Text="{i18n:Translate ProvideComment}" TextColor="Gray" FontSize="Medium" Margin="2, 9, 2, 0" HorizontalOptions="Start" VerticalOptions="Start"/>
+								</Grid>
+							</Grid>
+						</StackLayout>
+					</Grid>
+				</StackLayout>
+			</ScrollView>
+			<StackLayout Margin="20, 20" Grid.Row="1" Orientation="Vertical" VerticalOptions="End">
+				<local:GreenButton x:Name="ButtonCheckout" Text="{i18n:Translate ContinuetoPayment}" HorizontalOptions="Fill" VerticalOptions="Center" />
+			</StackLayout>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+		<local:ActivityIndicatorView 
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

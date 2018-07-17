@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+		xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+		x:Class="ColonyConcierge.Mobile.Customer.AddressSuggestionListPage"
+		Title="{i18n:Translate ServiceAddress}"
+		x:Name="thisPage">
+		<Grid IsClippedToBounds="false">
+			<StackLayout x:Name="StackLayoutBackgroundBehind" Orientation="Vertical" IsEnabled="false">
+				<Image x:Name="ImageBackgroundBehind" Source="whereareyou.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" IsEnabled="false" Opacity="0.25"/>
+			</StackLayout>
+			<ScrollView x:Name="scrollView" Padding="0,10,0,0">
+                <StackLayout BindingContext="{x:Reference thisPage}" HorizontalOptions="Fill" >
+					<Grid Margin="20, 0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<ActivityIndicator HeightRequest="22" WidthRequest="22" VerticalOptions="Center" Color="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"
+                     					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+                        <local:EntryCustom Grid.Column="1" Placeholder="{i18n:Translate ServiceAddress}" x:Name="addressEntry"
+                                            TextChanged="addressEntry_TextChanged"
+                                            VerticalOptions="FillAndExpand"
+											FontSize="Medium"
+                                            Text="{Binding SearchText}">
+                        </local:EntryCustom>
+						<Image Grid.Column="2" x:Name="ImageClose" HeightRequest="22" Source="close.png" VerticalOptions="Center" />
+					</Grid>	
+				
+					<StackLayout Margin="20, 0" Orientation="Horizontal">
+                       <Label Grid.Row="1" Text="{Binding ZipValid}" IsVisible="{Binding MessageVisible}" FontSize="Small" HorizontalOptions="Center" />
+					</StackLayout>
+				
+					<StackLayout Margin="20, 0" Padding="0, 8" x:Name="ButtonUseCurrentLocation" Orientation="Horizontal" HorizontalOptions="Center">
+						<Image HeightRequest="22" Source="map.png" VerticalOptions="Center" />
+					    <Label x:Name="LabelUseCurrentLocation" IsVisible="true" Text="{i18n:Translate UseCurrentLocation}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontSize="Medium" VerticalOptions="Center"/>
+					</StackLayout>
+
+					<Grid x:Name="GridPreviouslyUsedAddresses" Margin="20, 3, 20, 0">
+						<Grid HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1.1">
+							<StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+								<Label FontSize="Large" Text="{i18n:Translate Addresses}" TextColor="Gray"/>
+								<StackLayout Orientation="Vertical">
+							  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+									<Grid x:Name="GridCheckBoxPreviouslyUsedAddressesText1">
+										<Grid.ColumnDefinitions>
+							              <ColumnDefinition Width="*"/>
+							              <ColumnDefinition Width="auto"/>
+								        </Grid.ColumnDefinitions>
+										<Label Grid.Column="0" x:Name="CheckBoxPreviouslyUsedAddressesText1" FontSize="Small" HorizontalOptions="Fill" LineBreakMode="WordWrap"/>
+										<Image Grid.Column="1" IsEnabled="false" x:Name="ImageCheckBoxPreviouslyUsedAddressesText1" Aspect="AspectFit" HeightRequest="18" Margin="3, 0" IsVisible="false" Source="checkOrange.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+									</Grid>
+									<Grid x:Name="GridCheckBoxPreviouslyUsedAddressesText2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>	
+									<Label x:Name="CheckBoxPreviouslyUsedAddressesText2" FontSize="Small" HorizontalOptions="Fill" LineBreakMode="WordWrap"/>
+								</StackLayout>
+							</StackLayout>
+						</Grid>
+					</Grid>
+				
+					<Grid Margin="20, 0" x:Name="AddressMessageNoMatches" IsVisible="False">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="auto" />
+						</Grid.ColumnDefinitions>
+					    <Label Grid.Column="0" Text="{i18n:Translate AddressNoMatches}" FontSize="Small" HorizontalOptions="Center" />
+					    <Image Grid.Column="1" Source="nextb.png" WidthRequest="15" HorizontalOptions="End" />
+					</Grid>
+				
+					<Grid x:Name="GridAddressError" IsVisible="False">
+						<local:ErrorView x:Name="ErrorViewAddress" VerticalOptions="Center" HorizontalOptions="Center"/>
+					</Grid>
+
+				<!--	<Grid x:Name="GridSelectdAddressError" IsVisible="False">
+						<local:ErrorView x:Name="ErrorViewSelectAddress" VerticalOptions="Center" HorizontalOptions="Center"/>
+					</Grid>-->
+				
+					<Grid x:Name="GridAddressSearchResults" IsVisible="False" BackgroundColor="White" Padding="20, 0, 20, 0">
+	                    <ListView
+	                                ItemSelected="ListView_ItemSelected"
+	                                ItemsSource="{Binding Places}"
+									SeparatorColor="Transparent"
+									SeparatorVisibility="None"
+									HasUnevenRows="true">
+					        <ListView.ItemTemplate>
+					          <DataTemplate>
+					            <ViewCell>
+					              <ViewCell.View>
+					                <Grid VerticalOptions="Center">
+										<StackLayout Orientation="Vertical" Padding="0, 10" Spacing="0">
+											<StackLayout Orientation="Horizontal" Spacing="0">
+												<Label Text="{Binding MainTextLeft}" TextColor="Black" FontSize="Small" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+												<Label Text="{Binding MainTextMatch}" TextColor="Black" FontSize="Small" FontAttributes="Bold" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+												<Label Text="{Binding MainTextRight}" TextColor="Black" FontSize="Small" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+											</StackLayout>
+											<Label Text="{Binding StructuredFormatting.SecondaryText}" TextColor="Gray" FontSize="Small" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+										</StackLayout>
+								  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+					                </Grid>
+					              </ViewCell.View>
+					            </ViewCell>
+					          </DataTemplate>
+	                        </ListView.ItemTemplate>
+	                    </ListView>
+					</Grid>
+                </StackLayout>
+			</ScrollView>
+			<StackLayout x:Name="StackLayoutBackgroundFront" Orientation="Vertical" IsEnabled="false">
+				<Image  x:Name="ImageBackgroundFront" Source="whereareyou.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" IsEnabled="false" Opacity="0.15"/>
+			</StackLayout>
+			<local:ActivityIndicatorView
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsWaitLocation}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsWaitLocation}"/>
+		</Grid>
+</local:ContentPageBase>

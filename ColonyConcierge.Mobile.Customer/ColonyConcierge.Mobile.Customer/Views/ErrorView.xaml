@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ColonyConcierge.Mobile.Customer.ErrorView"
+		xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer">
+	<Grid>
+		<StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" Padding="12, 0">
+			<Label Text="{i18n:Translate PullDataFailMessage}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
+			<Grid x:Name="GridTryAgain" HorizontalOptions="Center" Padding="12, 6" >
+  	 	 		<Label TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" Text="{i18n:Translate TryAgain}" HorizontalOptions="Center" FontSize="Medium"/>
+			</Grid>
+		</StackLayout>
+	</Grid>
+</ContentView>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 Title="{i18n:Translate SchoolLunch}"
+             x:Class="ColonyConcierge.Mobile.Customer.SchoolLunchAddressPage"
+             x:Name="thisPage">
+	<Grid RowSpacing="0">
+	  <ListView x:Name="ListViewSchools" BackgroundColor="White" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None"  VerticalOptions="FillAndExpand">
+	    <ListView.ItemTemplate>
+	      <DataTemplate>
+	        <local:CustomCell TransparentHover="true">
+	          <local:CustomCell.View>
+				<Grid Padding="10, 10">
+	                <Grid Padding="10,10" BackgroundColor="{Binding BackgroundColor}">
+						<Grid>
+		                    <Label Text="{Binding Model.DisplayName}" FontSize="Medium" Margin="0, 5" TextColor="#fff" VerticalOptions="Center"/>
+						</Grid>
+	                </Grid>
+				</Grid>
+	          </local:CustomCell.View>
+	        </local:CustomCell>
+	      </DataTemplate>
+	    </ListView.ItemTemplate>
+	  </ListView>
+	  <local:ActivityIndicatorView
+	                     IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

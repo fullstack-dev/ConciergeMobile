@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+	xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+	x:Class="ColonyConcierge.Mobile.Customer.AddAddressPage"
+	x:Name="thisPage"
+	Title="{i18n:Translate AddServiceAddressTitle}">
+	<ContentPage.Content>
+		<Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+			<ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+				<StackLayout Orientation="Vertical" Padding="20,27,20,27">
+					<StackLayout.Spacing>
+		                <OnPlatform x:TypeArguments="x:Double" Android="6" iOS="12" />
+		            </StackLayout.Spacing>
+					<StackLayout Spacing="0">
+                        <Entry Placeholder="{i18n:Translate ServiceAddress}" x:Name="addressEntry" HorizontalOptions="FillAndExpand">
+                            <Entry.Behaviors>
+								<local:RequiredValidator FieldName="{i18n:Translate ServiceAddress}"  x:Name="addressValidator" MinLength="1"/>
+                            </Entry.Behaviors>
+                        </Entry>
+						<Label Text=" " FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+                    </StackLayout>
+           
+                    <StackLayout Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+                        <Entry Placeholder="{i18n:Translate ApartmentUnit}" x:Name="apartmentEntry" HorizontalOptions="FillAndExpand"/>
+						<Label Text=" " FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+                    </StackLayout>
+				
+                    <StackLayout Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+                         <Entry Placeholder="{i18n:Translate City}" x:Name="cityEntry" HorizontalOptions="FillAndExpand">
+                            <Entry.Behaviors>
+								<local:RequiredValidator FieldName="{i18n:Translate City}"  x:Name="cityValidator" MinLength="1"/>
+							</Entry.Behaviors>
+                        </Entry>
+						<Label Text=" " FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+						<Grid>
+							<Grid.ColumnDefinitions>
+						        <ColumnDefinition Width="2*"/>
+						        <ColumnDefinition Width="3*" />
+						    </Grid.ColumnDefinitions>
+							<Grid Grid.Column="0">
+								<Picker x:Name="stateEntry" Title="{i18n:Translate State}">
+									<Picker.Behaviors>
+											<local:PickerRequiredValidator FieldName="{i18n:Translate State}"  x:Name="stateValidator" />
+									</Picker.Behaviors>
+						    	</Picker>
+							</Grid>
+							<Grid Grid.Column="1">
+						        <StackLayout Orientation="Horizontal" Spacing="10">
+						            <Entry Keyboard="Numeric" Placeholder="{i18n:Translate ZipCode}" x:Name="zipcodeEntry" HorizontalOptions="FillAndExpand">
+										<Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate ZipCode}"  x:Name="zipCodeValidator" MinLength="1"/>
+										</Entry.Behaviors>
+						            </Entry>
+						        </StackLayout>
+							</Grid>
+						 </Grid>
+						 <Label Text=" " FontSize="Small" HorizontalOptions="FillAndExpand"  Margin="0, 3, 0, 0"/>
+					</StackLayout>
+				</StackLayout>
+			</ScrollView>
+                                
+            <Grid Grid.Row="1">
+                <local:GreenButton Margin="20,20" Text="{i18n:Translate Next}" IsEnabled="False" Clicked="ButtonNext_Clicked" HorizontalOptions ="FillAndExpand" >
+                	<local:GreenButton.Triggers>
+		                <MultiTrigger TargetType="local:GreenButton">
+		                    <MultiTrigger.Conditions>
+		                        <BindingCondition Binding="{Binding Source={x:Reference addressValidator}, Path=IsValid}" Value="True" />
+		                        <BindingCondition Binding="{Binding Source={x:Reference cityValidator}, Path=IsValid}" Value="True" />
+		                        <BindingCondition Binding="{Binding Source={x:Reference zipCodeValidator}, Path=IsValid}" Value="True" />
+		                        <BindingCondition Binding="{Binding Source={x:Reference stateValidator}, Path=IsValid}" Value="True" />
+		                    </MultiTrigger.Conditions>
+		                    <Setter Property="IsEnabled" Value="True"/>
+		                </MultiTrigger>
+		            </local:GreenButton.Triggers>
+				</local:GreenButton>
+            </Grid>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+
+	        <local:ActivityIndicatorView Grid.RowSpan="2"
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+        </Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

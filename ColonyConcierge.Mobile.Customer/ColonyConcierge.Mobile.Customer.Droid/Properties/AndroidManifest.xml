@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.colonyconcierge.asystyou.droid" android:versionCode="19" android:versionName="1.3.2">
+	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="26" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.LOCATION_HARDWARE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.FLASHLIGHT" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<application android:label="AsystYou" android:largeHeap="true" android:icon="@drawable/smiley">
+		<service android:name="com.google.android.gms.measurement.AppMeasurementService" android:enabled="true" android:exported="false" />
+		<receiver android:name="com.google.android.gms.measurement.AppMeasurementReceiver" android:enabled="true">
+			<intent-filter>
+				<action android:name="com.google.android.gms.measurement.UPLOAD" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+				<category android:name="com.colonyconcierge.asystyou.droid" />
+			</intent-filter>
+		</receiver>
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCir3LoNcxeoOQELnuxJ0O-f6g8cjf4YeQ" />
+	</application>
+</manifest>

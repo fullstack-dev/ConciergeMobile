@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="ColonyConcierge.Mobile.Customer.MyShoppingPrefPage"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Name="thisPage"
+			 xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             Title="{i18n:Translate ShoppingTitle}">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+ 	   </Grid.RowDefinitions>
+		<ScrollView>
+		    <StackLayout VerticalOptions="StartAndExpand" Margin="20,10,20,0" Orientation="Vertical">
+				<StackLayout Orientation="Vertical" Margin="0,0,0,10">
+					<Label Text="{i18n:Translate MYShoppingPref}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+					<Grid BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+				</StackLayout>
+					
+				<StackLayout Orientation="Vertical" Margin="0,0,0,30" Spacing="10">
+	                <Label Margin ="10,0,0,0" Text="{i18n:Translate BrandSubstitution}" FontAttributes="Bold" FontSize="Small" HorizontalOptions="FillAndExpand" />
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="auto"/>
+						</Grid.ColumnDefinitions>
+						<Switch Grid.Column="1" Margin = "10,0,0,0" IsToggled="{Binding DefaultBrandSubstitution}" HorizontalOptions="Start" VerticalOptions="Center"/>
+	                	<Label Grid.Column="0" Margin="10,0,0,0" Text="{i18n:Translate BrandDescription}"  VerticalOptions="Center" FontSize="Small" HorizontalOptions="FillAndExpand" />
+					</Grid>
+				</StackLayout>
+
+				<StackLayout Orientation="Vertical" Margin="0,0,0,30" Spacing="10">
+	                <Label Margin ="10,0,0,0" Text="{i18n:Translate GenericSubstitution}" FontAttributes="Bold" FontSize="Small" HorizontalOptions="FillAndExpand" />
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="auto"/>
+						</Grid.ColumnDefinitions>
+						<Switch Grid.Column="1" Margin="10,0,0,0" IsToggled="{Binding DefaultGenericSubstitution}" HorizontalOptions="Start" VerticalOptions="Center"/>
+	                	<Label Grid.Column="0" Margin="10,0,0,0" Text="{i18n:Translate GenericDescription}" VerticalOptions="Center" FontSize="Small" HorizontalOptions="FillAndExpand" />
+					</Grid>
+				</StackLayout>
+
+				<StackLayout Orientation="Vertical" Margin="0,0,0,30" Spacing="10">
+	                <Label Margin ="10,0,0,0" Text="{i18n:Translate SizeWeightSubstitution}" FontAttributes="Bold" FontSize="Small" HorizontalOptions="FillAndExpand" />
+					<StackLayout Orientation="Horizontal">
+	                	<Label Margin="10,0,0,0" Text="{i18n:Translate SizeDescription}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+					</StackLayout>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<StackLayout Orientation="Horizontal" VerticalOptions="Center">
+							<Switch Margin = "10,0,10,0" IsToggled="{Binding DefaultCanSubstituteLarger}" VerticalOptions="Center"/>
+							<Label  Text="{i18n:Translate Larger}" FontSize="Small" HorizontalOptions="Fill" VerticalOptions="Center"/>
+						</StackLayout>
+						<StackLayout Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+							<Switch Margin = "10,0,10,0" IsToggled="{Binding DefaultCanSubstituteSmaller}" VerticalOptions="Center"/>
+							<Label  Text="{i18n:Translate Smaller}" FontSize="Small" HorizontalOptions="Fill" VerticalOptions="Center"/>
+						</StackLayout>
+					</Grid>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+		<StackLayout Orientation="Horizontal" Grid.Row="1">
+            <local:GreenButton Margin="20,20,20,20" Text="{i18n:Translate Save}" IsEnabled="true" Clicked="Button_Clicked" HorizontalOptions ="FillAndExpand" >
+                <local:GreenButton.Triggers>
+                    <MultiTrigger TargetType="local:GreenButton">
+                        <MultiTrigger.Conditions>
+                            
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True" />
+                    </MultiTrigger>
+                </local:GreenButton.Triggers>
+            </local:GreenButton>
+        </StackLayout>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+			IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

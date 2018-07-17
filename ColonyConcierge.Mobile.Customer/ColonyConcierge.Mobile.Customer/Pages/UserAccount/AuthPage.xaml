@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             x:Class="ColonyConcierge.Mobile.Customer.AuthPage">
+    <local:CustomNavigationPage x:Name="SignInNavigationPage" Title="{i18n:Translate SignIn}">
+        <x:Arguments>
+            <local:SigninPage x:Name="SigninPage" IsHaveSignIn="false" />
+        </x:Arguments>
+    </local:CustomNavigationPage>
+    <local:CustomNavigationPage x:Name="SignUpNavigationPage" Title="{i18n:Translate SignUp}">
+        <x:Arguments>
+            <local:SignupPage x:Name="SignupPage" IsHaveSignIn="false" />
+        </x:Arguments>
+    </local:CustomNavigationPage>
+</TabbedPage>

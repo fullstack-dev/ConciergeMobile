@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 x:Class="ColonyConcierge.Mobile.Customer.AccountAddressTypePage" 
+			 x:Name="thisPage" 
+			 Title="{i18n:Translate SignUp}">
+	<Grid>
+		<Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+		<ScrollView Orientation="Vertical"  VerticalOptions="StartAndExpand">
+			<StackLayout Padding="20, 27, 20, 45" Orientation="Vertical" Spacing="0" VerticalOptions="StartAndExpand">
+				<StackLayout.Spacing>
+	           		 <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+	           	</StackLayout.Spacing>
+				
+				<StackLayout x:Name="StackLayoutTitle" Margin="0" Orientation="Vertical">
+		             <StackLayout.Spacing>
+		           		 <OnPlatform x:TypeArguments="x:Double" iOS="6" Android="0"/>
+		           	 </StackLayout.Spacing>
+					 <StackLayout Margin="0,0,0,6" Orientation="Vertical">
+						<Label x:Name="LabelTitle" Text="{i18n:Translate ServiceAddressTitle}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+						<Grid x:Name="GridLineTitle" BackgroundColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+					</StackLayout>
+				</StackLayout>
+
+				<StackLayout Spacing="0" Orientation="Vertical">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+					<StackLayout Spacing="0" Orientation="Vertical" BindingContext="{x:Reference thisPage}">
+						<local:AddressEntry Placeholder="{i18n:Translate ServiceAddress}" ParenntPage="{x:Reference thisPage}" x:Name="addressEntry" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="{Binding SearchText}">
+							<Entry.Behaviors>
+								<local:RequiredValidator x:Name="addressValidator"/>
+							</Entry.Behaviors>
+						</local:AddressEntry>
+					</StackLayout>
+					<Label Text=" " FontSize="Small" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+
+				<StackLayout Spacing="0" Orientation="Vertical">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+					<StackLayout Orientation="Vertical">
+						<Entry Placeholder="{i18n:Translate Apartment}" Text="{Binding ServiceAddress.BasicAddress.Line2}" HorizontalOptions="FillAndExpand" x:Name="apartmentEntry">
+							<Entry.Behaviors>
+									<local:RequiredValidator x:Name="apartmentValidator"/>
+							</Entry.Behaviors>
+						</Entry>
+					</StackLayout>
+					<Label Text=" " FontSize="Small" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+		<StackLayout Orientation="Horizontal" Grid.Row="1">
+			<local:GreenButton x:Name="NextButton" Margin="20,20,20,20" Text="{i18n:Translate Next}" IsEnabled="False" Clicked="ButtonNext_Clicked" HorizontalOptions="FillAndExpand">
+				<local:GreenButton.Triggers>
+					<MultiTrigger TargetType="local:GreenButton">
+						<MultiTrigger.Conditions>
+							<BindingCondition Binding="{Binding Source={x:Reference addressValidator}, Path=IsValid}" Value="True" />
+							<BindingCondition Binding="{Binding Source={x:Reference thisPage}, Path=IsValid}" Value="True" />
+						</MultiTrigger.Conditions>
+						<Setter Property="IsEnabled" Value="True" />
+					</MultiTrigger>
+				</local:GreenButton.Triggers>
+			</local:GreenButton>
+			<local:GreenButton x:Name="SaveButton" Margin="20,20,20,20" Text="{i18n:Translate Save}" IsEnabled="true" Clicked="ButtonNext_Clicked" HorizontalOptions="FillAndExpand">
+				<local:GreenButton.Triggers>
+					<MultiTrigger TargetType="local:GreenButton">
+						<MultiTrigger.Conditions>
+							<BindingCondition Binding="{Binding Source={x:Reference addressValidator}, Path=IsValid}" Value="True" />
+							<BindingCondition Binding="{Binding Source={x:Reference thisPage}, Path=IsValid}" Value="True" />
+						</MultiTrigger.Conditions>
+						<Setter Property="IsEnabled" Value="True" />
+					</MultiTrigger>
+				</local:GreenButton.Triggers>
+			</local:GreenButton>
+		</StackLayout>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+                         IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

@@ -1,0 +1,1 @@
+APIStringGenerator.exe ..\..\APIServer\Server\ColonyConcierge.API\bin\Release\ColonyConcierge.API.dll >EndPoints.cs

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+			x:Class="ColonyConcierge.Mobile.Customer.MyShoppingListPage"
+			x:Name="thisPage"
+			Title="{i18n:Translate ShoppingList}">
+	<ContentPage.Content>
+		<Grid>
+			<Grid RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<ListView x:Name="ListViewMyShopping" HasUnevenRows="true" SeparatorColor="Transparent" SeparatorVisibility="None">
+					<ListView.ItemTemplate>
+				      <DataTemplate>
+				        <local:CustomCell>
+							<Grid>
+								<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Spacing="0">
+									<StackLayout Padding="10" Orientation="Horizontal">
+										<Image Aspect="AspectFit" HeightRequest="18" Margin="5, 0" IsVisible="{Binding IsSelected}" Source="checkOrange.png" VerticalOptions="Center"/>
+										<Label Text="{Binding Model.Name}" TextColor="Black" FontSize="Large" VerticalOptions="Center"/>
+									</StackLayout>
+									<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+								</StackLayout>
+							</Grid>
+						</local:CustomCell>				
+				      </DataTemplate>
+				    </ListView.ItemTemplate>
+				</ListView>
+				<Label x:Name="LabelNoItems" Grid.Column="0" Text="{i18n:Translate NoSavedShoppingCarts}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+				<StackLayout x:Name="StackLayoutAddItem" Margin="20, 20" IsVisible="false" Grid.Row="1" Orientation="Vertical" VerticalOptions="End">
+					<local:GreenButton x:Name="ButtonAddItem" Text="{i18n:Translate AddItem}" HorizontalOptions="Fill" VerticalOptions="Center" />
+				</StackLayout>
+				<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+			</Grid>
+			<local:ActivityIndicatorView 
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

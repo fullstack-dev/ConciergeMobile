@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+		     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             x:Class="ColonyConcierge.Mobile.Customer.IntroView">
+  <ContentView.Content>
+	<Grid x:Name="GridContent" BackgroundColor="Transparent" VerticalOptions="Fill">
+        <ffimageloading:CachedImage x:Name="ImageBackground" Source="hero.png" DownsampleToViewSize="true" Aspect="AspectFill"/>
+<!--		<ffimageloading:CachedImage Opacity="0" Source="shutterstock.png" IsVisible="false" x:Name="ImageBackground" Aspect="AspectFill"/>-->
+		<Grid x:Name="GridLogo" HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="0" RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="9*"/>
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="8*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<View x:Name="ViewBackgroundColorImageLogo" VerticalOptions="CenterAndExpand" Grid.ColumnSpan="3" BackgroundColor="#D9ffffff"/>
+            <ffimageloading:CachedImage x:Name="ImageLogo" Margin="0,1,0,0" Grid.Column="1" BackgroundColor="#ffffff" HorizontalOptions="Fill" VerticalOptions="Center" DownsampleToViewSize="true" Aspect="AspectFit"/>
+		</Grid>
+		<StackLayout x:Name="GridTitle" VerticalOptions="Center" Margin="0,0,0,40" Spacing="10" Orientation="Vertical" BackgroundColor="Transparent">
+            <Label Margin="50, 0" Text="{Binding Title}" FontAttributes="Bold" FontSize="Large" HorizontalTextAlignment="Center" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+            <Image x:Name="ImageImage" Margin="100,0,100,0" Source="{Binding Image}" Aspect="AspectFit" HeightRequest="200"/>
+            <Label Margin="100,0,100,0" Text="{Binding SubTitle}" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+            <Label Margin="100,0,100,0" Text="{Binding Description}" HorizontalTextAlignment="Center" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+        </StackLayout>
+	</Grid>
+  </ContentView.Content>
+</ContentView>

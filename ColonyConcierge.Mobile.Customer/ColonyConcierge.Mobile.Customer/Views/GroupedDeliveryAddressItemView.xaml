@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ColonyConcierge.Mobile.Customer.GroupedDeliveryAddressItemView"
+		xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" >
+	<ContentView.Content>
+		<Grid BackgroundColor="Transparent" HorizontalOptions="Fill">
+			<Grid Padding="0, 5">
+				<Grid.ColumnDefinitions>
+	              <ColumnDefinition Width="*"/>
+	              <ColumnDefinition Width="auto"/>
+		        </Grid.ColumnDefinitions>
+				<StackLayout Grid.Column="0" Spacing="3" Orientation="Vertical">
+					<Label Text="{Binding Model.DisplayName}" FontSize="Medium" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="Fill" LineBreakMode="WordWrap"/>
+					<Label Text="{Binding DisplayAddress}" FontSize="Small" HorizontalOptions="Fill" TextColor="Gray" LineBreakMode="WordWrap"/>
+				</StackLayout>
+				<Image Grid.Column="1" IsEnabled="false" x:Name="ImageCheckBoxPreviouslyUsedAddressesText1" Aspect="AspectFit" HeightRequest="18" Margin="3, 0" IsVisible="{Binding IsSelected}" Source="checkOrange.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+			</Grid>
+			<Grid IsEnabled="false" BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+	</ContentView.Content>
+</ContentView>

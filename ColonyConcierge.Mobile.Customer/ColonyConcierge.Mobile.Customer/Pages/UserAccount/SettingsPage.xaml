@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="ColonyConcierge.Mobile.Customer.SettingsPage"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	         xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             x:Name="thisPage"
+	         Title="{i18n:Translate SettingTitle}">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height = "*"/>
+			<RowDefinition Height = "Auto"/>
+		</Grid.RowDefinitions>
+		<Grid>
+             <Grid.RowDefinitions>
+                  <RowDefinition />
+			 </Grid.RowDefinitions>
+			<StackLayout Orientation ="Vertical" Spacing ="10">
+				<Grid ColumnSpacing="0"> 
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+    				<Label Grid.Column="0" Margin = "20" Text="{i18n:Translate ReceiveNotification}" FontSize="Small" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+    				<Switch Grid.Column="1" Margin = "20" IsToggled="{Binding Path=Monitored, Mode=TwoWay}" HorizontalOptions="End" VerticalOptions="FillAndExpand" />
+				</Grid>
+				<Entry x:Name="EntryToken"/>
+			</StackLayout>
+		</Grid>
+		<local:GreenButton Grid.Row="1" Margin="20,20,20,20" Text="{i18n:Translate Save}" IsEnabled="true"
+                Clicked = "Save_button_clicked" HorizontalOptions = "FillAndExpand">
+                <local:GreenButton.Triggers>
+                    <MultiTrigger TargetType="local:GreenButton">
+                        <MultiTrigger.Conditions>
+                            
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True" />
+                    </MultiTrigger>
+                </local:GreenButton.Triggers>
+        </local:GreenButton>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+			x:Class="ColonyConcierge.Mobile.Customer.ShoppingListPage"
+			x:Name="thisPage"
+			Title="{i18n:Translate ShoppingList}">
+	<Grid BackgroundColor="#FAF9F7">
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<ListView Grid.Row="0" x:Name="ListViewShoppingListItem" HasUnevenRows="true" SeparatorColor="Transparent" SeparatorVisibility="None">
+				<ListView.ItemTemplate>
+			      <DataTemplate>
+			        <ViewCell>
+						<Grid>
+							<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Spacing="0">
+								<Grid BackgroundColor="White">
+								    <Grid.ColumnDefinitions>
+						              <ColumnDefinition Width="1.5*"/>
+						              <ColumnDefinition Width="8.5*"/>
+						              <ColumnDefinition Width="auto"/>
+							        </Grid.ColumnDefinitions>
+									<Grid Grid.Column="0" BackgroundColor="#FAF9F7" Padding="5, 0, 5, 0">
+										<Label Grid.Column="0" Text="{Binding Model.Quantity}" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Gray"/>
+									</Grid>
+									<StackLayout Grid.Column="1" Orientation="Vertical" HorizontalOptions="Fill" Padding="0, 10, 0, 10">
+										<Label Text="{Binding Model.Product.Brand}" FontSize="Small" />
+										<Label Text="{Binding Model.Product.Name}" FontSize="Small" />
+										<StackLayout Orientation="Horizontal" Spacing="0">
+											<Label Text="{i18n:Translate SizeWeightLess}" FontSize="Small" VerticalOptions="Center" TextColor="Gray"/>
+											<Label Text="{Binding Model.Product.Size}" FontSize="Small" VerticalOptions="Center" TextColor="Gray"/>
+										</StackLayout>
+									</StackLayout>
+									<StackLayout Grid.Column="2" Padding="8" VerticalOptions="Center" HorizontalOptions="Center">	
+										<StackLayout.GestureRecognizers>
+									        <TapGestureRecognizer
+									            Command="{Binding DeleteCommand}"/>
+									    </StackLayout.GestureRecognizers>
+										<Image HeightRequest="22" Source="deleteicon.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+									</StackLayout>
+								</Grid>
+								<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+							</StackLayout>
+						</Grid>
+					</ViewCell>				
+			      </DataTemplate>
+			    </ListView.ItemTemplate>
+			</ListView>
+			<Image x:Name="ImageEmpty" Grid.Row="0" Source="emptyshoppingcart.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Center" IsEnabled="false" Opacity="0.4"/>
+			<StackLayout Grid.Row="1" Orientation="Vertical" Spacing="0">
+				<Grid Margin="0, 6">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition Width="auto"></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Label x:Name="LabelAddItems" Grid.Column="0" Text="{i18n:Translate AddItem}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+			  	  	<Grid Grid.Column="1" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" WidthRequest="2" VerticalOptions="Fill" />
+					<StackLayout x:Name="StackLayoutFromMySavedLists" Grid.Column="2" Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Spacing="0">
+						<Label Text="{i18n:Translate AddItems}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+						<Label Text="{i18n:Translate FromMySavedLists}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+					</StackLayout>
+				</Grid>
+				<Grid Padding="10, 6">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+					<Switch Grid.Column="1" x:Name="SwitchSaveShoppingList" VerticalOptions="Center"></Switch>
+					<Label Grid.Column="0" Text="{i18n:Translate SaveShoppingList}" Margin="0, 0, 10, 0" FontSize="Medium" TextColor="Gray" VerticalOptions="Center"/>
+				</Grid>
+				<Entry x:Name="EntryShoppingListName" IsVisible="False" Placeholder="{i18n:Translate ShoppingListName}" FontSize="Medium" Margin="10, 0"/>
+			</StackLayout>
+			<StackLayout Grid.Row="2" Margin="20, 20" Orientation="Vertical" VerticalOptions="Start">
+				<local:GreenButton x:Name="ButtonCheckout" Text="{i18n:Translate ContinuetoPayment}" HorizontalOptions="Fill" VerticalOptions="Center" />
+			</StackLayout>
+			<Grid Grid.Row="2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+		<local:ActivityIndicatorView
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

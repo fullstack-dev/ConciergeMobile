@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+		xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+		x:Class="ColonyConcierge.Mobile.Customer.ActivityIndicatorView"
+		VerticalOptions="FillAndExpand"
+		HorizontalOptions="FillAndExpand"
+		x:Name="thisControl">
+		<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#09000000">
+			<Frame x:Name="GridIndicatorControl" HorizontalOptions="Center" VerticalOptions="Center" HasShadow="false" OutlineColor="Gray" BackgroundColor="#e3e9e9e9" Padding="6" CornerRadius="6">
+				<ActivityIndicator x:Name="ActivityIndicatorControl" Color="#43b02a" HorizontalOptions="Center" VerticalOptions="Center" IsRunning="True"/>
+			</Frame>
+		</Grid>
+</ContentView>

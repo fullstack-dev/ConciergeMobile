@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+			x:Class="ColonyConcierge.Mobile.Customer.ShoppingPage"
+			x:Name="thisPage"
+			Title="{i18n:Translate Shopping}">
+	<Grid>
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<ScrollView Grid.Row="0" Orientation="Vertical">
+				<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Spacing="6">
+					<StackLayout Spacing="0" Margin="10, 8">
+						<Label FontSize="Medium" Text="{i18n:Translate ScheduleYourShopping}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+						<Label FontSize="Small" Text="{i18n:Translate ScheduleYourShoppingMessage}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+					</StackLayout>
+					
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate DeliveryAddress}" TextColor="Gray"/>
+							<Grid HorizontalOptions="Fill">
+								<local:AddressEntry x:Name="addressEntry" Placeholder="{i18n:Translate ServiceAddress}" ParenntPage="{x:Reference thisPage}" FontSize="Medium"/>
+							</Grid>
+							<Entry x:Name="apartmentUnitEntry" Placeholder="{i18n:Translate ApartmentUnit}" FontSize="Medium"/>
+						</StackLayout>
+					</Grid>
+
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate ServiceDate}" TextColor="Gray"/>
+							<Grid ColumnSpacing="6" HorizontalOptions="Fill">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image Grid.Column="0" HeightRequest="24" Source="calendar.png" VerticalOptions="Center"/>
+								<DatePicker Grid.Column="1" x:Name="DatePickerService" VerticalOptions="Center" HorizontalOptions="Fill"/>
+							</Grid>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="auto"/>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0" Text="{i18n:Translate RepeatServiceWeekly}" FontSize="Small" TextColor="Gray" HorizontalOptions="Fill" VerticalOptions="Center"/>
+								<Switch Grid.Column="1" x:Name="SwitchServiceWeekly" VerticalOptions="Center"></Switch>
+							</Grid>
+						</StackLayout>
+					</Grid>
+
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout BackgroundColor="White" Spacing="8" Padding="10, 10, 10, 24" Orientation="Vertical">
+							<Label FontSize="Large" Text="{i18n:Translate StorePreferances}" TextColor="Gray"/>
+							<Picker Grid.Column="1" x:Name="PickerStorePreferances" VerticalOptions="Center" HorizontalOptions="Fill"/>
+						</StackLayout>
+					</Grid>
+
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout Spacing="12" x:Name="StackLayoutShoppingPreferances" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+							<Label FontSize="Large" Text="{i18n:Translate ShoppingPreferances}" TextColor="Gray"/>
+							<Grid VerticalOptions="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="auto"/>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0" x:Name="LabelShoppingPreferancesValue" FontSize="Small" Text="{i18n:Translate Default}" TextColor="Gray" VerticalOptions="Center"/>
+			                  	<Image Grid.Column="1" Source="rightarrow.png" HeightRequest="22" HorizontalOptions="Center" VerticalOptions="Center"/>
+							</Grid>
+						</StackLayout>
+					</Grid>
+
+					<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+						<StackLayout Spacing="6" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+							<Label FontSize="Large" Text="{i18n:Translate Comments}" TextColor="Gray"/>
+							<Grid HorizontalOptions="Fill" ColumnSpacing="8">
+								<Grid>
+									<Editor HeightRequest="80" x:Name="EntryProvideComment" FontSize="Medium" VerticalOptions="Start"/>
+									<Label x:Name="LabelProvideComment" IsEnabled="false" Text="{i18n:Translate ProvideComment}" TextColor="Gray" FontSize="Medium" Margin="2, 9, 2, 0" HorizontalOptions="Start" VerticalOptions="Start"/>
+								</Grid>
+							</Grid>
+						</StackLayout>
+					</Grid>
+				</StackLayout>
+			</ScrollView>
+
+			<Grid Grid.Row="1" x:Name="GridCheckout" VerticalOptions="Fill" RowSpacing="0" ColumnSpacing="0" IsVisible="False" Padding="0, 0" HorizontalOptions="Fill">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid Grid.Column="0" BackgroundColor="#48AE34" HorizontalOptions="Fill" VerticalOptions="Fill" />
+				<Grid Grid.Column="1" BackgroundColor="#3C9F2A" HorizontalOptions="Fill" VerticalOptions="Fill" />
+			</Grid>
+			
+			<Grid Grid.Row="1" x:Name="GridShoppingList" Padding="20, 20">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+					<Image Margin="0, 0, 8, 0" HeightRequest="20" Source="cart_white.png" VerticalOptions="Center"/>
+                    <Label x:Name="LabelItems" FontSize="Small" Text="{i18n:Translate ShoppingList}" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+				</StackLayout>
+				<StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+                    <Label FontSize="Small" Text="{i18n:Translate ShoppingList}" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+					<Image Margin="8, 0, 0, 0" HeightRequest="20" Source="next.png" VerticalOptions="Center"/>
+				</StackLayout>
+			</Grid>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+<!--				<Button x:Name="ButtonCheckout" Text="{i18n:Translate Checkout}" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="Medium" Margin="0" BorderWidth="0" BorderRadius="0" />-->
+		</Grid>
+		<local:ActivityIndicatorView 
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

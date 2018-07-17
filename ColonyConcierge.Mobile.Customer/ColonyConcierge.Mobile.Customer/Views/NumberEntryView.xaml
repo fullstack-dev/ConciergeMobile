@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+	 xmlns="http://xamarin.com/schemas/2014/forms" 
+	 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	 xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+     xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+	 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	 x:Class="ColonyConcierge.Mobile.Customer.NumberEntryView">
+	<ContentView.Content>
+		<Grid HeightRequest="41" WidthRequest="125">
+			<StackLayout x:Name="StackLayoutEnabled" IsVisible="false" IsEnabled="{Binding IsEnabled}"/>
+			<StackLayout x:Name="StackLayoutEnabledAdd" IsVisible="false" IsEnabled="{Binding IsEnabledAdd}"/>
+<!--			<Image HeightRequest="40" x:Name="ImageButton" Source="add_less_button.png" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Fill"/>-->
+			<Grid BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" x:Name="GridButton" ColumnSpacing="0" VerticalOptions="Fill" HorizontalOptions="Fill">
+				<Grid BackgroundColor="White">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="39"/>
+						<ColumnDefinition Width="4*"/>
+						<ColumnDefinition Width="39"/>
+					</Grid.ColumnDefinitions>
+					<Grid x:Name="ButtonLess" Padding="6, 0, 3, 0" Grid.Column="0">
+						<Image Source="less_button.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Fill"/>
+					</Grid>
+					<Entry Grid.Column="1" x:Name="EntryNumber" IsVisible="false" FontAttributes="Bold" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" IsEnabled="{Binding IsEnabled}" Text="{Binding Quantity, Mode=TwoWay}" HorizontalTextAlignment="Center" Keyboard="Numeric" HorizontalOptions="Fill" VerticalOptions="Center"/>
+					<Label Grid.Column="1" x:Name="LabelNumber" FontSize="Medium" FontAttributes="Bold"  HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+					<Grid x:Name="ButtonAdd" Padding="6, 0, 3, 0" Grid.Column="2">
+						<Image Source="add_button.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Fill"/>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+	</ContentView.Content>
+</ContentView>

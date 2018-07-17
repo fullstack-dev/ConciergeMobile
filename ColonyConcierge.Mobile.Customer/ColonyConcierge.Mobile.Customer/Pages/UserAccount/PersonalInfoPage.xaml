@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="ColonyConcierge.Mobile.Customer.PersonalInfoPage"
+             x:Name="thisPage"
+             Title="{i18n:Translate SignUp}">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+		<ScrollView VerticalOptions="StartAndExpand">
+	         <StackLayout Padding="20,27,20,45" VerticalOptions="FillAndExpand">
+				<StackLayout.Spacing>
+	           		 <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+	           	</StackLayout.Spacing>
+				
+	            <StackLayout Margin="0" Orientation="Vertical">
+		            <StackLayout.Spacing>
+		           		 <OnPlatform x:TypeArguments="x:Double" iOS="6" Android="0"/>
+		           	</StackLayout.Spacing>
+					<StackLayout Margin="0,0,0,6" Orientation="Vertical">
+						<Label Text="{i18n:Translate PersonalInfo}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+						<Grid BackgroundColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+					</StackLayout>
+	            </StackLayout>
+
+				<StackLayout Orientation="Vertical" Spacing="0">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+	                <StackLayout Orientation="Horizontal" Spacing="10">
+	                    <Image Source="person.png" HeightRequest="24" />
+	                    <Entry Placeholder="{i18n:Translate FirstName}" x:Name="firstNameEntry" Text="{Binding FirstName}" HorizontalOptions="FillAndExpand">
+	                        <Entry.Behaviors>
+	                            <local:RequiredValidator FieldName="{i18n:Translate FirstName}"  x:Name="firstNameValidator" />
+	                        </Entry.Behaviors>
+	                    </Entry>
+	                </StackLayout>
+	                <Label Text="{Binding Source={x:Reference firstNameValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+	            </StackLayout>
+
+	            <StackLayout Orientation="Vertical" Spacing="0">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+	                <StackLayout Orientation="Horizontal" Spacing="10">
+	                    <Image Source="person.png" HeightRequest="24" />
+	                    <Entry Placeholder="{i18n:Translate LastName}" x:Name="lastNameEntry" Text="{Binding LastName}" HorizontalOptions="FillAndExpand">
+	                        <Entry.Behaviors>
+	                            <local:RequiredValidator FieldName="{i18n:Translate LastName}"  x:Name="lastNameValidator" />
+	                        </Entry.Behaviors>
+	                    </Entry>
+	                </StackLayout>
+	                <Label Text="{Binding Source={x:Reference lastNameValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+	            </StackLayout>
+
+	            <StackLayout Orientation="Vertical" Spacing="0">
+					<StackLayout.Spacing>
+						<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+					</StackLayout.Spacing>
+	                <StackLayout Orientation="Horizontal" Spacing="10">
+	                    <Image Source="cellphone.png" HeightRequest="24" />
+	                    <Entry Keyboard="Telephone" Placeholder="{i18n:Translate MobileNumber}" x:Name="cellPhoneEntry" Text="{Binding PhoneNumbers[0].Number}" HorizontalOptions="FillAndExpand">
+	                        <Entry.Behaviors>
+	                            <local:RequiredValidator FieldName="{i18n:Translate MobileNumber}" MinLength="10"  x:Name="cellPhoneValidator" />
+							</Entry.Behaviors>
+	                    </Entry>
+	                </StackLayout>
+		                <Label Text="{Binding Source={x:Reference cellPhoneValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+	            </StackLayout>
+	        </StackLayout>
+	    </ScrollView>
+        <StackLayout Orientation="Horizontal" Grid.Row="1">
+            <local:GreenButton Margin="20,20,20,20" Text="{i18n:Translate Next}" IsEnabled="False" Clicked="ButtonNext_Clicked" HorizontalOptions ="FillAndExpand" >
+                <local:GreenButton.Triggers>
+                    <MultiTrigger TargetType="local:GreenButton">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Source={x:Reference firstNameValidator}, Path=IsValid}" Value="True" />
+                            <BindingCondition Binding="{Binding Source={x:Reference lastNameValidator}, Path=IsValid}" Value="True" />
+                            <BindingCondition Binding="{Binding Source={x:Reference cellPhoneValidator}, Path=IsValid}" Value="True" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True" />
+                    </MultiTrigger>
+                </local:GreenButton.Triggers>
+            </local:GreenButton>
+        </StackLayout>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+	</Grid>
+</local:ContentPageBase>

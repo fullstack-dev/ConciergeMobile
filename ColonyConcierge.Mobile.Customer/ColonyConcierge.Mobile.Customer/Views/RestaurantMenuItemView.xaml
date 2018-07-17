@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+	xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:controls="clr-namespace:ColonyConcierge.Mobile.Customer"
+	x:Class="ColonyConcierge.Mobile.Customer.RestaurantMenuItemView">
+
+	<Grid IsEnabled="{Binding IsEnabled}" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" >
+		<StackLayout BackgroundColor="{Binding GroupSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" Padding="10" IsVisible="{Binding IsMenuSection}" Orientation="Vertical" HorizontalOptions="Fill">
+			<Label Text="{Binding SectionName}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" FontAttributes="Bold" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+			<Label Text="{Binding SectionDetail}" IsVisible="{Binding SectionDetail, Converter={StaticResource stringToVisibleConverter}}" FontSize="Small" TextColor="Gray"/>
+		</StackLayout>
+		<Grid Padding="10, 12" IsVisible="{Binding IsMenuItem}" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" >
+		    <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto"/>
+              <ColumnDefinition Width="*"/>
+	        </Grid.ColumnDefinitions>
+			<Image Grid.Column="0" Aspect="AspectFit" HeightRequest="18" Margin="3, 0" IsVisible="{Binding IsSelected}" Source="checkOrange.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+			<Grid x:Name="StackLayoutItem" Grid.Column="1" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">			
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="9*"/>
+					<ColumnDefinition>
+						<ColumnDefinition.Width>
+							<OnPlatform x:TypeArguments="GridLength" Android="auto" iOS="2*"/>
+						</ColumnDefinition.Width>
+				  </ColumnDefinition>
+	            </Grid.ColumnDefinitions>
+				<Label x:Name="LabelName" Grid.Column="0" VerticalOptions="CenterAndExpand" Text="{Binding DisplayName}" FontSize="Small" IsEnabled="{Binding IsEnabled}">
+					<Label.Triggers>
+					    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+					        <Setter Property="TextColor" Value="Black" />
+					    </Trigger>
+					    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+					        <Setter Property="TextColor" Value="Gray" />
+					    </Trigger>
+
+					</Label.Triggers>
+				</Label>
+	    		<Label BackgroundColor="Transparent" x:Name="LabelDisplayPrice" Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="End" Text="{Binding RestaurantMenuItem.DisplayPrice}" FontSize="Small" IsEnabled="{Binding IsEnabled}">
+					<Label.Triggers>
+					    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+					        <Setter Property="TextColor" Value="Black" />
+					    </Trigger>
+					    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+					        <Setter Property="TextColor" Value="Gray" />
+					    </Trigger>
+					</Label.Triggers>
+				</Label>
+				<!--<Label Margin="0, 0, 10, 0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="LabelDescription" IsVisible="false" FontSize="Small" LineBreakMode="TailTruncation">
+					<Label.Triggers>
+					    <Trigger TargetType="Label" Property="IsEnabled" Value="true">
+					        <Setter Property="TextColor" Value="Blue" />
+					    </Trigger>
+					    <Trigger TargetType="Label" Property="IsEnabled" Value="false">
+					        <Setter Property="TextColor" Value="Blue" />
+					    </Trigger>
+					</Label.Triggers>
+				</Label>-->
+                <controls:MultiLineLabel 
+                    Margin="0, 0, 10, 0" 
+                    Grid.Row="1" Grid.ColumnSpan="2" 
+                    x:Name="LabelDescription" 
+                    IsVisible="false" 
+                    FontSize="Small" 
+                    LineBreakMode="TailTruncation"
+                    Lines="2"
+                    TextColor="Gray"
+                /> 
+			</Grid>		
+		</Grid>	
+		<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="End" HorizontalOptions="Fill"/>
+	</Grid>
+</ContentView>

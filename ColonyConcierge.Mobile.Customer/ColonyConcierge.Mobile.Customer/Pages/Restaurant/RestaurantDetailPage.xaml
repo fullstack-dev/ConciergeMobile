@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" 
+			xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+			x:Class="ColonyConcierge.Mobile.Customer.RestaurantDetailPage"
+			NavigationPage.BackButtonTitle=" "
+		 	x:Name="thisPage">
+    <Grid BackgroundColor="White" RowSpacing="0">
+      	<Grid.RowDefinitions>
+        	<RowDefinition Height="auto"/>
+        	<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="1" RowSpacing="0" Padding="0,0,0,0">
+		  <Grid.RowDefinitions>
+		    <RowDefinition Height="auto"/>
+		    <RowDefinition Height="*"/>
+		    <RowDefinition Height="auto"/>
+		  </Grid.RowDefinitions>
+		  <StackLayout x:Name="GridMenus" Grid.Row="0" Orientation="Horizontal" BackgroundColor="{Binding GroupSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}">
+		  </StackLayout>
+		  <Grid x:Name="GridMenuItems" Grid.Row="1" VerticalOptions="FillAndExpand" Margin="0,0,0,0">
+		  </Grid>
+		  <Grid Grid.Row="2" x:Name="GridCheckout" VerticalOptions="Fill" RowSpacing="0" ColumnSpacing="0" IsVisible="False" Padding="0, 0" HorizontalOptions="Fill">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid Grid.Column="0" BackgroundColor="#48AE34" HorizontalOptions="Fill" VerticalOptions="Fill" />
+				<Grid Grid.Column="1" BackgroundColor="#3C9F2A" HorizontalOptions="Fill" VerticalOptions="Fill" />
+		  </Grid>
+		  <Grid Grid.Row="2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		  <Grid x:Name="GridCheckButton" BackgroundColor="Transparent" Grid.Row="2" IsVisible="false" ColumnSpacing="0" VerticalOptions="Fill" HorizontalOptions="Fill" Padding="0, 8">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition>
+					<ColumnDefinition.Width>
+		                <OnPlatform x:TypeArguments="GridLength"  iOS="18*" Android="18*" WinPhone="18*" />
+					</ColumnDefinition.Width>
+				</ColumnDefinition>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+					<Image Margin="0, 0, 8, 0" HeightRequest="20" Source="cart_white.png" VerticalOptions="Center"/>
+					<StackLayout Orientation="Vertical" VerticalOptions="Center" Spacing="0">
+						<Label x:Name="LabelItemCarts" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="Small" TextColor="#b0dd8b" Margin="0, 0, 0, 0"/>
+						<Label x:Name="LabelItemsPrice" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="Small" TextColor="White"/>
+						<Label x:Name="LabelFees" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="Small" TextColor="#b0dd8b" Margin="0, 0, 0, 0"/>
+					</StackLayout>
+				</StackLayout>
+				<StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+					<Label Text="{i18n:Translate ViewCart}" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="Small" FontAttributes="Bold" TextColor="White"/>
+					<Image Margin="8, 0, 0, 0" HeightRequest="20" Source="next.png" VerticalOptions="Center"/>
+				</StackLayout>
+			</Grid>
+		  </Grid>
+		</Grid>
+      	<Grid x:Name="GridSelectDate" IsVisible="false" Grid.Row="1" RowSpacing="0" BackgroundColor="#33000000">
+			<Grid.RowDefinitions>
+			    <RowDefinition Height="3*"/>
+			    <RowDefinition Height="2*"/>
+			</Grid.RowDefinitions>
+			<Grid x:Name="GridSelectDateContent" Grid.Row="0" BackgroundColor="White" RowSpacing="0">
+				<Grid.RowDefinitions>
+				    <RowDefinition Height="auto"/>
+				    <RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<Grid x:Name="GridDeliveryPickupTab" VerticalOptions="Start" Grid.Row="0" ColumnSpacing="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<Grid Grid.Column="0">
+						<StackLayout Orientation="Horizontal" Padding="0, 12" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent">
+							<local:RadioButtonCustom x:Name="CustomRadioButtonDeliveryTab" Text="1" TextColor="Transparent" Checked="false" VerticalOptions="Center" HorizontalOptions="Center"/>
+							<Label x:Name="LabelDeliveryTab" TextColor="Black" Text="{i18n:Translate Delivery}" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Medium"/>
+						</StackLayout>
+						<Grid x:Name="StackLayoutDeliveryTab"  BackgroundColor="Transparent"/>
+					</Grid>
+					<Grid Grid.Column="1">
+						<StackLayout Orientation="Horizontal" Padding="0, 12" HorizontalOptions="Center" VerticalOptions="Center">
+							<local:RadioButtonCustom x:Name="CustomRadioButtonPickupTab" Text="1" TextColor="Transparent" Checked="false" VerticalOptions="Center" HorizontalOptions="Center"/>
+							<Label x:Name="LabelPickupTab" TextColor="Black" Text="{i18n:Translate Pickup}" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Medium"/>
+						</StackLayout>
+						<Grid x:Name="StackLayoutPickupTab" BackgroundColor="Transparent"/>
+					</Grid>
+				</Grid>
+				<Grid Grid.Row="1" VerticalOptions="CenterAndExpand" ColumnSpacing="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="2*"/>
+					</Grid.ColumnDefinitions>
+					<ListView Grid.Column="0" x:Name="ListViewDate" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" BackgroundColor="White" SeparatorColor="Transparent" SeparatorVisibility="None">
+						<x:Arguments>
+			                <ListViewCachingStrategy>
+			                    <OnPlatform x:TypeArguments="ListViewCachingStrategy" Android="RecycleElement"/>
+			                </ListViewCachingStrategy>
+           				</x:Arguments>
+					    <ListView.ItemTemplate>
+					      <DataTemplate>
+					        <local:CustomCell TransparentHover="true">
+								<Grid>
+									<Grid BackgroundColor="{Binding BackgroundColor}">
+										<Label Margin="10" Grid.Column="0" Text="{Binding DateTime}" FontSize="Small" TextColor="{Binding TextColor}" VerticalOptions="Center"/>
+									</Grid>
+									<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>	
+								</Grid>
+							</local:CustomCell>				
+					      </DataTemplate>
+					    </ListView.ItemTemplate>
+					</ListView>
+					<ListView Grid.Column="1" x:Name="ListViewTime" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="White" SeparatorColor="Transparent" SeparatorVisibility="None">
+						<x:Arguments>
+			                <ListViewCachingStrategy>
+			                    <OnPlatform x:TypeArguments="ListViewCachingStrategy" Android="RecycleElement"/>
+			                </ListViewCachingStrategy>
+           				</x:Arguments>
+					    <ListView.ItemTemplate>
+					      <DataTemplate>
+					        <local:CustomCell TransparentHover="true">
+								<Grid BackgroundColor="{Binding BackgroundColor}">
+									<Label Margin="10" Grid.Column="0" Text="{Binding DateTime}" FontSize="Small" TextColor="{Binding TextColor}" VerticalOptions="Center"/>
+									<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>	
+								</Grid>
+							</local:CustomCell>				
+					      </DataTemplate>
+					    </ListView.ItemTemplate>
+					</ListView>
+			  		<local:ActivityIndicatorView  Grid.ColumnSpan="2"
+		         			IsRunning="{Binding Source={x:Reference thisPage}, Path=IsLoadingDateTime}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsLoadingDateTime}"/>	
+				</Grid>
+				<Grid VerticalOptions="End" Grid.Row="2" Margin="20, 20">
+					<local:GreenButton  x:Name="ButtonSave" Text="{i18n:Translate Save}" HorizontalOptions="Fill" VerticalOptions="Center"/>
+				</Grid>
+				<Grid Grid.Row="2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+			</Grid>
+			<Grid x:Name="GridHideDate" Grid.Row="1"/>
+		</Grid>
+	    <Grid Grid.Row="0" x:Name="GridSelectedDate" Margin="0, 0, 0, 0" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}">
+			<Grid.ColumnDefinitions>
+	        	<ColumnDefinition Width="auto"/>
+	        	<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+			<Grid Grid.Column="0" Padding="8,8,0,8" VerticalOptions="Center">
+				<Image Source="calendar_white.png" HeightRequest="22" VerticalOptions="Center"/>
+			</Grid>
+			<StackLayout Grid.Column="1" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsSelectedDateDisplay}" Orientation="Vertical" VerticalOptions="Center" Margin="10, 5" Spacing="0">
+				<Label x:Name="LabelSelectedDate" Text="{Binding Source={x:Reference thisPage}, Path=SelectedDateDisplay}" VerticalOptions="Center" TextColor="White"/>
+				<Label x:Name="LabelTimeZone" FontSize="Micro" TextColor="#b0dd8b" FontAttributes="Bold" VerticalOptions="Center"/>
+			</StackLayout>
+			<Grid Grid.Column="2" Padding="4,0,6,0">
+				<Image x:Name="ImageSelectDate" Source="arrow_up_white.png" HeightRequest="16"/>
+			</Grid>
+		</Grid>
+	  	<local:ActivityIndicatorView Grid.RowSpan="2" IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>	
+    </Grid>
+</local:ContentPageBase>

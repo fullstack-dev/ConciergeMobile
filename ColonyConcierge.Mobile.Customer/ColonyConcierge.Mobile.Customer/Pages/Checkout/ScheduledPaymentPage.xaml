@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+			xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+			xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+			x:Class="ColonyConcierge.Mobile.Customer.ScheduledPaymentPage"
+		 	x:Name="thisPage">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+			<x:Array x:Key="deliveryPickup" Type = "{x:Type x:String}"> 
+		        <x:String>Delivery</x:String> 
+		        <x:String>Pickup</x:String>
+		    </x:Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentPage.Content>
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+		    <Grid Grid.Row="0" Margin="0,0,0,6" BackgroundColor="#f9bc32" IsVisible="{Binding Source={x:Reference thisPage}, Path=RestaurantDetailPage.CheckTimeDeliveryVisible}">
+				<Label Text="{Binding Source={x:Reference thisPage}, Path=RestaurantDetailPage.CheckTimeDeliveryText}" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" Margin="0, 10"/>
+		    </Grid>
+			<Grid Grid.Row="1">
+				<ScrollView Padding="0, 10" Orientation="Vertical">
+					<StackLayout Orientation="Vertical" Spacing="8">
+
+						<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+							<StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+								<Label FontSize="Large" Text="{i18n:Translate ScheduledFor}" TextColor="Gray"/>
+								<StackLayout x:Name="StackLayoutBindableRadioGroupDeliveryPickup" Spacing="8" Orientation="Vertical">
+									<xlabcontrols:BindableRadioGroup x:Name="BindableRadioGroupDeliveryPickup"
+						   									 ItemsSource="{StaticResource deliveryPickup}"
+															 Orientation="Horizontal"
+															 Padding="-6, 0"
+															 Spacing="0"
+		                   									 HorizontalOptions="FillAndExpand"
+															 Margin="0, 6"
+															 SelectedIndex="{Binding Source={x:Reference thisPage}, Path=SelectedIndex, Mode=TwoWay}">
+			              			</xlabcontrols:BindableRadioGroup>
+								</StackLayout>
+								<Grid VerticalOptions="Start">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Grid HorizontalOptions="Fill">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="auto"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<Image Source="calendar.png" HeightRequest="24" VerticalOptions="Center"/>
+										<Picker Grid.Column="1" x:Name="PickerDate" TextColor="Black" HorizontalOptions="Fill" VerticalOptions="Center"/>
+									</Grid>
+									<Grid Grid.Column="1" HorizontalOptions="Fill">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="auto"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<Image Source="clock.png" HeightRequest="22" VerticalOptions="Center"/>
+										<Picker Grid.Column="1" x:Name="PickerTime" TextColor="Black" HorizontalOptions="Fill" VerticalOptions="Center"/>
+									</Grid>
+								</Grid>
+							</StackLayout>
+						</Grid>
+						
+						<Grid x:Name="GridDeliveryAddress" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+							<StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+								<Label FontSize="Large" Text="{i18n:Translate DeliveryAddress}" TextColor="Gray"/>
+								<Grid ColumnSpacing="10" HorizontalOptions="Fill">
+									<local:AddressEntry ParenntPage="{x:Reference thisPage}" Placeholder="{i18n:Translate ServiceAddress}" x:Name="addressEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+								</Grid>
+								<Grid x:Name="GridApartment" HorizontalOptions="Fill">
+									<Entry Placeholder="{i18n:Translate Apartment}" HorizontalOptions="FillAndExpand" x:Name="apartmentEntry" VerticalOptions="Center"/>
+								</Grid>
+							</StackLayout>
+						</Grid>
+
+						<Grid BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1" Margin="10, 8">
+							<StackLayout Spacing="6" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+								<Label FontSize="Large" Text="{i18n:Translate SpecialInstructionsProvide}" TextColor="Gray"/>
+								<Grid HorizontalOptions="Fill" ColumnSpacing="8">
+									<Grid>
+										<Editor HeightRequest="80" x:Name="EntryProvideComment" FontSize="Medium"/>
+										<Label x:Name="LabelProvideComment" IsEnabled="false" Text="{i18n:Translate ProvideOrderComment}" TextColor="Gray" FontSize="Medium" Margin="2, 9, 2, 0" HorizontalOptions="Start" VerticalOptions="Start"/>
+									</Grid>
+								</Grid>
+							</StackLayout>
+						</Grid>
+					</StackLayout>
+				</ScrollView>
+			</Grid>
+			<Grid Grid.Row="2" VerticalOptions="End" Margin="20, 20" RowSpacing="0" ColumnSpacing="0">
+				<local:GreenButton x:Name="ButtonCheckout" Text="{i18n:Translate ContinuetoPayment}" HorizontalOptions="Fill" VerticalOptions="Center" IsEnabled="false"/>
+			</Grid>
+			<Grid Grid.Row="2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+	        <local:ActivityIndicatorView Grid.RowSpan="3" IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             x:Class="ColonyConcierge.Mobile.Customer.SignupPage"
+             x:Name="thisPage"
+             Title="{i18n:Translate SignUp}">
+	<Grid VerticalOptions="Fill" RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+		<ScrollView VerticalOptions="StartAndExpand">
+			<StackLayout VerticalOptions="FillAndExpand" Padding="0,27,0,45">
+			    <StackLayout Padding="20,0,20,0" VerticalOptions="FillAndExpand">
+					<StackLayout.Spacing>
+		           		 <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+		           	</StackLayout.Spacing>
+					
+			        <StackLayout Margin="0" Orientation="Vertical">
+			             <StackLayout.Spacing>
+			           		 <OnPlatform x:TypeArguments="x:Double" iOS="6" Android="0"/>
+			           	 </StackLayout.Spacing>
+						 <StackLayout Margin="0,0,0,6" Orientation="Vertical">
+							<Label Text="{i18n:Translate AccountSecurity}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+							<Grid BackgroundColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+						</StackLayout>
+					</StackLayout>
+					
+		            <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+		                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
+		                    <Image Source="email.png" WidthRequest="24" />
+		                    <Entry Keyboard="Email" Placeholder="{i18n:Translate Email}" Text="{Binding EmailAddress}" HorizontalOptions="FillAndExpand">
+		                        <Entry.Behaviors>
+		                            <local:EmailValidator x:Name="emailValidator" />
+		                        </Entry.Behaviors>
+		                    </Entry>
+		                </StackLayout>
+		                <Label Text="{Binding Source={x:Reference emailValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+		            </StackLayout>
+						
+			        <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+		                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
+		                    <Image Source="key.png" WidthRequest="24" />
+		                    <Entry IsPassword="True" Placeholder="{i18n:Translate Password}" x:Name="passwordEntry" Text="{Binding Password}" HorizontalOptions="FillAndExpand">
+		                        <Entry.Behaviors>
+		                            <local:PasswordValidator x:Name="passwordValidator" />
+		                        </Entry.Behaviors>
+		                    </Entry>
+		                </StackLayout>
+		                <Label Text="{Binding Source={x:Reference passwordValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+					</StackLayout>	
+					
+		            <StackLayout Orientation="Vertical" Spacing="0">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+		                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
+		                    <Image Source="key.png" WidthRequest="24" />
+		                    <Entry x:Name="ConfirmPasswordEntry" IsPassword="true" Placeholder="{i18n:Translate ConfirmPassword}" Text="{Binding ConfirmPassword}"  HorizontalOptions="FillAndExpand" >
+		                        <Entry.Behaviors>
+		                            <local:PasswordValidator x:Name="confirmpasswordValidator" />
+		                        </Entry.Behaviors>
+		                    </Entry>
+		                </StackLayout>
+		                <Label Text="{Binding Source={x:Reference confirmpasswordValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+		            </StackLayout>
+			    </StackLayout>
+				<StackLayout x:Name="StackLayoutSignIn" Padding="10,0,10,0" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 10, 0, 0">
+					<Label Text="{i18n:Translate AlreadyMember}" TextColor="Black" FontSize="Medium"/>
+					<Label x:Name="LabelSignIn" Text="{i18n:Translate SignIn}" FontAttributes="Bold" FontSize="Medium" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+		<local:GreenButton Grid.Row="1" Margin="20,20,20,20" Text="{i18n:Translate Next}" IsEnabled="False" Clicked="Button_Clicked">
+		    <local:GreenButton.Triggers>
+		        <MultiTrigger TargetType="local:GreenButton">
+		            <MultiTrigger.Conditions>
+		                <BindingCondition Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}" Value="True" />
+		                <BindingCondition Binding="{Binding Source={x:Reference passwordValidator}, Path=IsValid}" Value="True" />
+		                <BindingCondition Binding="{Binding Source={x:Reference confirmpasswordValidator}, Path=IsValid}" Value="True" />
+		            </MultiTrigger.Conditions>
+		            <Setter Property="IsEnabled" Value="True" />
+		        </MultiTrigger>
+		    </local:GreenButton.Triggers>
+		</local:GreenButton>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

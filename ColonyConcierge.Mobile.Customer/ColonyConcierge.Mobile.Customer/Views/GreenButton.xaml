@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	 	xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+		x:Class="ColonyConcierge.Mobile.Customer.GreenButton">
+	<Grid x:Name="GridButton" VerticalOptions="Center">
+		<Grid>
+			<local:ImageTouch x:Name="ImageButton" Source="button_green.png" VerticalOptions="Center" />
+			<local:ImageTouch x:Name="ImageButtonClick" IsVisible="false" Source="button_orange.png" VerticalOptions="Center" />
+		</Grid>
+		<Grid IsEnabled="false">
+			<Label x:Name="LabelText" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" IsEnabled="false" Text="{Binding Text}" TextColor="White" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+		</Grid>
+	</Grid>
+</ContentView>

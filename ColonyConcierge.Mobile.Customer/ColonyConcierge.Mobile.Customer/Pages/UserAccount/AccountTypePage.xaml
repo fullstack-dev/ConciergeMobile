@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             xmlns:xlabcontrols="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="ColonyConcierge.Mobile.Customer.AccountTypePage"
+             x:Name="thisPage"
+             Title="{i18n:Translate SignUp}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:AccountTypeToStringConverter x:Key="AccountConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackLayout Padding="20, 27, 20, 45" Orientation="Vertical">
+			<StackLayout.Spacing>
+           		 <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+           	</StackLayout.Spacing>
+			
+			<StackLayout x:Name="StackLayoutTitle" Margin="0" Orientation="Vertical">
+				<StackLayout.Spacing>
+	           		 <OnPlatform x:TypeArguments="x:Double" iOS="6" Android="0"/>
+	           	</StackLayout.Spacing>
+				<StackLayout Margin="0,0,0,6" Orientation="Vertical">
+					<Label Text="{i18n:Translate AccountType}" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+					<Grid BackgroundColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+				</StackLayout>
+			</StackLayout>
+			<ListView x:Name="ListViewSubscriptions" ItemsSource="{Binding Source={x:Reference thisPage}, Path=Plans}" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None">
+				<ListView.ItemTemplate>
+			    	<DataTemplate>
+       					<local:CustomCell>
+							<StackLayout Orientation="Horizontal" Padding="0, 10" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent">
+								<local:RadioButtonCustom Text="1" TextColor="Transparent" Checked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Center"/>
+								<StackLayout Orientation="Vertical" HorizontalOptions="Fill">
+									<Label FontAttributes="Bold" Text="{Binding DisplayName}" HorizontalOptions="Start" VerticalOptions="Center"/>
+									<Label Text="{Binding Description}" HorizontalOptions="Start" VerticalOptions="Center"/>
+								</StackLayout>
+							</StackLayout>
+
+						</local:CustomCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+        </StackLayout>
+        <Grid Grid.Row="1" Margin="20,20,20,20">
+            <local:GreenButton x:Name="ButtonNext" Text="{i18n:Translate Next}" IsEnabled="false" Clicked="ButtonNext_Clicked" HorizontalOptions="FillAndExpand" />
+        </Grid>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+					IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+    </Grid>
+</local:ContentPageBase>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+		     x:Class="ColonyConcierge.Mobile.Customer.RestaurantsTabPage"
+			 x:Name="thisPage"
+			 NavigationPage.BackButtonTitle="{i18n:Translate Back}"
+			 Title="{i18n:Translate RestaurantsNearYou}">
+    <Grid BackgroundColor="#FAF9F7" RowSpacing="0">
+	    <Grid.RowDefinitions>
+          <RowDefinition Height = "auto"/>
+	      <RowDefinition Height="auto"/>
+	      <RowDefinition Height="*"/>
+	    </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid Margin="20, 10, 20, 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <local:EntryCustom Grid.Column="0" Placeholder="Search Restaurant" x:Name="restaurantEntry"
+                    TextChanged="restaurantEntry_TextChanged"
+                    VerticalOptions="FillAndExpand"
+                    FontSize="Medium"
+                    Text="{Binding SearchText}">
+                </local:EntryCustom>
+                <Image Grid.Column="1" x:Name="ImageClose" HeightRequest="22" WidthRequest="22" Source="close.png" VerticalOptions="Center"/>
+            </Grid> 
+        </Grid>
+		<Grid Grid.Row="1" BackgroundColor="#f9f9f9" Padding="10" IsVisible="False" HeightRequest="50">
+			<Grid.ColumnDefinitions>		
+			  <ColumnDefinition Width="*"/>
+			  <ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>		
+			<StackLayout Grid.Column="0" Orientation="Horizontal">
+				<Label Text="Next Delivery ASAP" FontSize="18" />
+			</StackLayout>
+			<StackLayout Grid.Column="1" Orientation="Horizontal">
+				<Label Text="Edit" FontSize="18" />
+			</StackLayout>
+		</Grid>
+	    <ListView Grid.Row="2" x:Name="ListViewRestaurant" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None">
+	      <ListView.ItemTemplate>
+	        <DataTemplate>
+	          <local:CustomCell TransparentHover="true">
+	             <local:CustomCell.View>
+					<Grid BackgroundColor="{Binding BackgroundColor}" Padding="1" Margin="9, 8">
+						<StackLayout Orientation="Vertical" Spacing="0">
+							<Grid BackgroundColor="#FCEFE0" Padding="6, 0" IsVisible="{Binding ClosedMessageVisible}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image HeightRequest="20" Source="clock_orange.png" HorizontalOptions="Center" VerticalOptions="Center">
+									<Image.Margin>
+										<OnPlatform x:TypeArguments="Thickness" iOS="0, 8" Android="0, 6" WinPhone="0, 6" />
+									</Image.Margin>
+								</Image>
+								<Label Grid.Column="1" Text="{Binding ClosedMessage}" VerticalOptions="Center" LineBreakMode="WordWrap" FontSize="Micro" TextColor="{Binding OrangeColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+							</Grid>
+							<!--<Grid BackgroundColor="#FAF9F7" ColumnSpacing="0">-->
+                            <Grid BackgroundColor="#FFFFFF" ColumnSpacing="0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+						        <Grid
+									Margin="6, 0"
+									WidthRequest="80" 
+									HeightRequest="80" 
+									VerticalOptions="Center">
+									<!--<ffimageloading:CachedImage 
+										HorizontalOptions="Center" 
+										VerticalOptions="Center"
+										WidthRequest="80" 
+										HeightRequest="80"
+										DownsampleToViewSize="true"
+										BackgroundColor="Transparent"
+										CacheDuration="0"
+										CacheType="Memory"
+										LoadingPlaceholder="restaurant_bg.jpg"
+										Source="restaurant_bg.jpg">
+										<ffimageloading:CachedImage.Transformations>
+											<fftransformations:CircleTransformation />
+										</ffimageloading:CachedImage.Transformations>
+									</ffimageloading:CachedImage>-->
+									<ffimageloading:CachedImage 
+										HorizontalOptions="Center" 
+										VerticalOptions="Center"
+										WidthRequest="78" 
+										HeightRequest="78"
+										DownsampleToViewSize="true"
+										BackgroundColor="Transparent"
+										CacheDuration="0"
+										CacheType="Memory"
+										LoadingPlaceholder="placeholder.jpg"
+										Source="{Binding LogoURL, Converter={StaticResource restaurantImageConveter}}">
+										<ffimageloading:CachedImage.Transformations>
+<!--											<fftransformations:CircleTransformation />-->
+										</ffimageloading:CachedImage.Transformations>
+									</ffimageloading:CachedImage>
+				                </Grid>
+				                <Grid Grid.Column="1" Padding="6, 3, 0, 3"  BackgroundColor="White">
+									<Label
+										HeightRequest="100"
+										WidthRequest="1" 
+										Text="1"
+										BackgroundColor="Transparent"
+										TextColor="Transparent"/>
+									<StackLayout BackgroundColor="White" Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Center" Padding="6, 0">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="auto"/>
+											</Grid.ColumnDefinitions>
+											<StackLayout  Grid.Column="0" Orientation="Vertical" HorizontalOptions="Fill">
+                                                <Label Text="{Binding RestaurantTitle}" FontSize="Small" TextColor="Black"/>
+												<Label Text="{Binding CategoriesText}" LineBreakMode="TailTruncation" FontSize="Small" TextColor="Gray"/>
+											</StackLayout>
+											<Image Grid.Column="1" Margin="6, 0, 6, 0" HeightRequest="16" Source="rightarrow.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+										</Grid>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="auto"/>
+												<ColumnDefinition Width="*"/>
+											</Grid.ColumnDefinitions>
+											<StackLayout Orientation="Horizontal">
+										   	 	<Label TextColor="Gray" Text="{Binding SearchResultData.DistanceInMeters, Converter={StaticResource metersToMilesConverter}}" FontSize="Small" />
+										    	<Label TextColor="Gray" Text=" miles" FontSize="Small" />
+											</StackLayout>
+											<Label Grid.Column="1" Margin="6, 0" FontAttributes="Italic" Text="{Binding Converter={StaticResource deliveryPickupToStringConverter}}" FontSize="Small" TextColor="Red" HorizontalOptions="End"/>
+										</Grid>
+					                </StackLayout>
+								</Grid>
+							</Grid>
+						</StackLayout>
+					</Grid>
+	            </local:CustomCell.View>
+	          </local:CustomCell>
+	        </DataTemplate>
+	      </ListView.ItemTemplate>
+	    </ListView>
+		<local:ActivityIndicatorView Grid.RowSpan="3"
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

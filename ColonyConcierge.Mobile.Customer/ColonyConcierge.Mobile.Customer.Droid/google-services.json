@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "720055671809",
+    "firebase_url": "https://asystyou-cc687.firebaseio.com",
+    "project_id": "asystyou-cc687",
+    "storage_bucket": "asystyou-cc687.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720055671809:android:437878cc65c90dd6",
+        "android_client_info": {
+          "package_name": "com.colonyconcierge.asystyou.droid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720055671809-ngi2n229j3f1k3dm3eg8ocb0uq0cgsk0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACUw0XT8d-ShgwiXu-mtlSOF6xxTozoc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

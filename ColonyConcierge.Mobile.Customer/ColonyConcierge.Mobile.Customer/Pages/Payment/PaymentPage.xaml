@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		     x:Class="ColonyConcierge.Mobile.Customer.PaymentPage"
+		     xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	      	 xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		 	 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Name="thisPage"
+	      	 Title="{i18n:Translate PaymentPageTitle}">
+	 <ContentPage.Resources>
+		<ResourceDictionary>
+   			<OnPlatform x:Key="Priority1" x:TypeArguments="x:Int32"
+      			iOS="0"
+      			Android="1"
+      			WinPhone="1" />
+  		</ResourceDictionary>
+	 </ContentPage.Resources>
+<!--	<ContentPage.ToolbarItems>
+ 	 <ToolbarItem  Order="Primary" Priority="{StaticResource Priority1}" Icon ="add_white.png" Activated = "toolbarOnClick"/>
+ </ContentPage.ToolbarItems>-->
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+ 		<Label Grid.Row="0" x:Name="LabelNoPaymentMethods" IsVisible="false" TextColor="Gray" Margin="10" Text="{i18n:Translate NoPaymentMethods}" FontSize="Medium"/>
+		<ListView Grid.Row="1" x:Name="lstView"
+				    ItemsSource = "{Binding Source={x:Reference thisPage}, Path=PaymentMethodList}" HorizontalOptions = "FillAndExpand"
+				    SeparatorColor="Transparent"
+				    SeparatorVisibility="None"
+					HasUnevenRows="true"
+					Footer="{Binding Source={x:Reference thisPage}}"
+					IsVisible= "false"
+				    ItemSelected="ListView_ItemSelected">
+			<ListView.FooterTemplate>
+				<DataTemplate>
+					<Grid Padding="6, 12">
+						<Grid.GestureRecognizers>
+							<TapGestureRecognizer
+					                Command="{Binding AddCommand}" />
+						</Grid.GestureRecognizers>	
+		  	 	 		<Label TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" Text="{i18n:Translate AddPaymentMethod}" HorizontalOptions="Center" FontSize="Medium"/>
+					</Grid>
+				</DataTemplate>
+			</ListView.FooterTemplate>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid>
+							<Grid Padding="0, 15">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto"/>
+									<ColumnDefinition Width="4*"/>
+									<ColumnDefinition Width="auto"/>
+								</Grid.ColumnDefinitions>
+								<ffimageloading:CachedImage 
+									WidthRequest="36"
+									DownsampleToViewSize="true"
+									VerticalOptions="FillAndExpand"
+									CacheType="All"
+									Margin="5,0,0,0"
+									Aspect="AspectFit"
+									Source="{Binding Model.creditTypeImg, Converter={StaticResource urlImageConveter}}">
+								</ffimageloading:CachedImage>
+<!--								<Label Grid.Column="0" Margin="5,0,0,0" Text= "{Binding CardType}" TextColor="Gray" HorizontalTextAlignment="Center" HorizontalOptions ="CenterAndExpand" VerticalOptions="CenterAndExpand"/>-->
+<!--								<Image Aspect="AspectFit" Source="{Binding Model.creditTypeImg, Converter={StaticResource restaurantImageConveter}}"></Image>-->
+								<StackLayout Grid.Column="1" Margin="5,0,0,0" Orientation="Vertical" Spacing="3">
+									<Label Text = "{Binding Model.AccountNickname}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" TextColor="Gray" HorizontalOptions ="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+									<Label Text = "{Binding CreditCardNumber}" TextColor="Black" HorizontalOptions ="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+								</StackLayout>
+								<Image Grid.Column="2" IsVisible="{Binding Model.IsPreferred}" Aspect="AspectFit" Margin="5,0,10,0" HeightRequest="18" Source="checkOrange.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+<!--								<Label Grid.Column="2" Margin="5,0,10,0" Text= "{Binding Preferred}" FontSize="{Binding FontMediumL1, Source={x:Static local:AppearanceBase.Instance}}" TextColor="Gray" HorizontalOptions ="FillAndExpand" VerticalOptions="CenterAndExpand"/>-->
+							</Grid>
+					  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="End" HorizontalOptions="Fill"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<local:ActivityIndicatorView Grid.RowSpan="2" IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}" />	
+	</Grid>
+</local:ContentPageBase>

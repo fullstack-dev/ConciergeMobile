@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ColonyConcierge.Mobile.Customer.ShoppingItemView"
+		xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+		xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+		xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer" >
+	<ContentView.Content>
+		<Grid BackgroundColor="Transparent" HorizontalOptions="Fill">
+			<Grid Padding="10, 10, 5, 10" VerticalOptions="Center">
+			    <Grid.ColumnDefinitions>
+	              <ColumnDefinition Width="1*"/>
+	              <ColumnDefinition Width="7*"/>
+		        </Grid.ColumnDefinitions>
+				<Label Grid.Column="0" Text="{Binding Model.Quantity}" FontSize="Small" VerticalOptions="Center"/>
+				<StackLayout Grid.Column="1" Orientation="Vertical">
+					<Label Text="{Binding Model.Product.Brand}" FontSize="Small" />
+					<Label Text="{Binding Model.Product.Name}" FontSize="Small" />
+					<StackLayout Orientation="Horizontal" Spacing="0">
+						<Label Text="{i18n:Translate SizeWeightLess}" FontSize="Small" VerticalOptions="Center"/>
+						<Label Text="{Binding Model.Product.Size}" FontSize="Small" VerticalOptions="Center"/>
+					</StackLayout>
+				</StackLayout>
+			</Grid>
+			<Grid IsEnabled="false" BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+	</ContentView.Content>
+</ContentView>

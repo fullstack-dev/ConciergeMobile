@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+			 x:Class="ColonyConcierge.Mobile.Customer.ContactInformationPage"
+             x:Name="thisPage"
+	         Title="{i18n:Translate ContactInfoTitle}">
+	<Grid RowSpacing="0">
+		<Grid x:Name="GridContent"  RowSpacing="0" IsVisible="false">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<ScrollView x:Name="scrollView">
+				<StackLayout Orientation="Vertical" >
+					<StackLayout Orientation="Vertical" Padding="20, 27, 20, 45">
+			            <StackLayout.Spacing>
+		           			<OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+			            </StackLayout.Spacing>
+							<StackLayout Orientation="Vertical" Spacing="0">
+								<StackLayout Orientation="Horizontal" Spacing="10"  Margin="0, 0, 0, 3">
+				                    <Entry Keyboard="Text" Placeholder="{i18n:Translate FirstName}" Text="{Binding FirstName}" x:Name="firstNameEntry" HorizontalOptions="FillAndExpand">
+				                        <Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate FirstName}"  x:Name="firstNameValidator" />
+				                        </Entry.Behaviors>
+				                    </Entry>
+				                </StackLayout>
+				                <Label Text="{Binding Source={x:Reference firstNameValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+							</StackLayout>
+						
+							<StackLayout Orientation="Vertical" Spacing="0">
+				                <StackLayout Orientation="Horizontal" Spacing="10"  Margin="0, 0, 0, 3">
+				                    <Entry Keyboard="Text" Placeholder="{i18n:Translate MiddleName}" Text="{Binding MiddleName}" x:Name="middleNameEntry" HorizontalOptions="FillAndExpand">
+				                         <Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate MiddleName}"  x:Name="middleNameValidator" />
+				                        </Entry.Behaviors>
+				                    </Entry>
+				                </StackLayout>
+				                <Label FontSize="Small" Text=" " HorizontalOptions="FillAndExpand" />
+			                </StackLayout>
+
+							<StackLayout Orientation="Vertical" Spacing="0">
+								<StackLayout.Spacing>
+									<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+								</StackLayout.Spacing>
+								<StackLayout Orientation="Horizontal" Spacing="10">
+				                    <Entry Keyboard="Text" Placeholder="{i18n:Translate LastName}" Text="{Binding LastName}" x:Name="lastNameEntry" HorizontalOptions="FillAndExpand">
+				                       <Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate LastName}"  x:Name="lastNameValidator" />
+				                        </Entry.Behaviors>
+				                    </Entry>
+				                </StackLayout>
+				                <Label Text="{Binding Source={x:Reference lastNameValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+			                </StackLayout>
+
+							<StackLayout Orientation="Vertical" Spacing="0">
+								<StackLayout.Spacing>
+									<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+								</StackLayout.Spacing>
+				                <StackLayout Orientation="Horizontal" Spacing="10">
+				                    <Entry IsEnabled="false" Keyboard="Text" Placeholder="{i18n:Translate Email}" Text="{Binding Email}" x:Name="emailEntry" HorizontalOptions="FillAndExpand">
+				                        <Entry.Behaviors>
+											<local:EmailValidator x:Name="emailValidator" />
+				                        </Entry.Behaviors>
+				                    </Entry>
+				                </StackLayout>
+				                <Label Text="{Binding Source={x:Reference emailValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+			   				</StackLayout>
+
+							<StackLayout  Orientation="Vertical" Spacing="0">
+								<StackLayout.Spacing>
+									<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+								</StackLayout.Spacing>
+				             	<StackLayout Orientation="Horizontal" Spacing="10">
+					                <Entry Keyboard="Telephone" Placeholder="{i18n:Translate MobileNumber}" x:Name="mobileNumberEntry" HorizontalOptions="FillAndExpand">
+					                      <Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate MobileNumber}" MinLength = "10"  x:Name="mobileNumberValidator" />
+					                      </Entry.Behaviors>
+					                </Entry>
+								</StackLayout>
+								<Label x:Name="mobileNumberEntrylabel" Text="{Binding Source={x:Reference mobileNumberValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+							</StackLayout>
+
+							<StackLayout Orientation="Vertical" Spacing="0">
+								<StackLayout.Spacing>
+									<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+								</StackLayout.Spacing>
+				             	<StackLayout Orientation="Horizontal" Spacing="10">
+					                <Entry Keyboard="Telephone" Placeholder="{i18n:Translate HomeNumber}" x:Name="homeNumberEntry" HorizontalOptions="FillAndExpand">
+					                      <Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate HomeNumber}" MinLength = "10"  x:Name="homeNumberValidator" />
+					                      </Entry.Behaviors>
+					                </Entry>
+								</StackLayout>
+								<Label x:Name="homeNumberEntrylabel" Text=" " FontSize="Small" HorizontalOptions="FillAndExpand" />
+							</StackLayout>
+
+							<StackLayout Orientation="Vertical" Spacing="0">
+								<StackLayout.Spacing>
+									<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+								</StackLayout.Spacing>
+				             	<StackLayout Orientation="Horizontal" Spacing="10">
+					                <Entry Keyboard="Telephone" Placeholder="{i18n:Translate WorkNumber}" x:Name="workNumberEntry" HorizontalOptions="FillAndExpand">
+					                      <Entry.Behaviors>
+											<local:RequiredValidator FieldName="{i18n:Translate WorkNumber}" MinLength = "10"  x:Name="workNumberValidator" />
+					                      </Entry.Behaviors>
+					                </Entry>
+								</StackLayout>
+								<Label x:Name="workNumberEntrylabel" Text=" " FontSize="Small" HorizontalOptions="FillAndExpand" />
+							</StackLayout>
+					</StackLayout>
+				</StackLayout>
+			</ScrollView>
+			<local:GreenButton Grid.Row="1" Margin="20,20,20,20" Text="{i18n:Translate Save}" IsEnabled="false"
+	                Clicked="Save_Button_Clicked">
+	            <local:GreenButton.Triggers>
+	                <MultiTrigger TargetType="local:GreenButton">
+	                    <MultiTrigger.Conditions>
+	                        <BindingCondition Binding="{Binding Source={x:Reference firstNameValidator}, Path=IsValid}" Value="True" />
+	                        <BindingCondition Binding="{Binding Source={x:Reference lastNameValidator}, Path=IsValid}" Value="True" />
+							<BindingCondition Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}" Value="True" />
+	                        <BindingCondition Binding="{Binding Source={x:Reference mobileNumberValidator}, Path=IsValid}" Value="True" />
+	                    </MultiTrigger.Conditions>
+	                    <Setter Property="IsEnabled" Value="True" />
+	                </MultiTrigger>
+	            </local:GreenButton.Triggers>
+	        </local:GreenButton>
+			<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+		</Grid>
+		<local:ActivityIndicatorView
+			IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+             Title="{i18n:Translate SignIn}"
+             x:Name="thisPage"
+             x:Class="ColonyConcierge.Mobile.Customer.SigninPage">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+		<ScrollView VerticalOptions="StartAndExpand">
+			<StackLayout Padding="0,27,0,45" Orientation="Vertical" VerticalOptions="FillAndExpand">
+			    <StackLayout Padding="20,0,20,0" Orientation="Vertical">
+					<StackLayout.Spacing>
+		           		 <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+		           	</StackLayout.Spacing>
+					
+					<StackLayout Margin="0" Orientation="Vertical">
+			             <StackLayout.Spacing>
+			           		 <OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+			           	 </StackLayout.Spacing>
+		                <StackLayout Orientation="Horizontal" Spacing="10">
+		                    <Image Source="email.png" HeightRequest="24" />
+		                    <Entry x:Name="emailEntry" Keyboard="Email"  Placeholder="{i18n:Translate EmailUsername}" Text="{Binding EmailAddress}" HorizontalOptions="FillAndExpand" >
+		                        <Entry.Behaviors>
+		                            <local:RequiredValidator FieldName="{i18n:Translate EmailUsername}"  x:Name="emailValidator" />
+		                        </Entry.Behaviors>
+		                    </Entry>
+		                </StackLayout>
+		                <Label Text="{Binding Source={x:Reference emailValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+		            </StackLayout>
+					
+					<StackLayout Margin="0" Orientation="Vertical">
+						<StackLayout.Spacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+						</StackLayout.Spacing>
+						<StackLayout Orientation="Horizontal" Spacing="10">
+							<Image Source="key.png" WidthRequest="24" />
+							<Entry IsPassword="True" Placeholder="{i18n:Translate Password}" x:Name="passwordEntry" Text="{Binding Password}" HorizontalOptions="FillAndExpand">
+							    <Entry.Behaviors>
+							        <local:RequiredValidator FieldName="{i18n:Translate Password}"  x:Name="passwordValidator" />
+							    </Entry.Behaviors>
+							</Entry>
+						</StackLayout>
+						<Label Text="{Binding Source={x:Reference passwordValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+		            </StackLayout>
+
+					<Label Margin="0, 0, 0, 10" x:Name="LabelForgotYourPassword" Text="{i18n:Translate ForgotYourPassword}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" HorizontalOptions="Center"/>
+			    </StackLayout>
+				<StackLayout x:Name="StackLayoutSignUp" Padding="10,0,10,0" Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 10, 0, 0">
+					<Label Text="{i18n:Translate DoNotAccount}" TextColor="Black" FontSize="Medium" />
+					<Label x:Name="LabelSignUp" Text="{i18n:Translate SignUp}" FontAttributes="Bold" FontSize="Medium" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}"/>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+        <local:GreenButton Grid.Row="1" Margin="20,20,20,20" Text="{i18n:Translate SignIn}" IsEnabled="False" Clicked="Button_Clicked">
+	        <local:GreenButton.Triggers>
+	            <MultiTrigger TargetType="local:GreenButton">
+	                <MultiTrigger.Conditions>
+	                    <BindingCondition Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}" Value="True" />
+	                    <BindingCondition Binding="{Binding Source={x:Reference passwordValidator}, Path=IsValid}" Value="True" />
+	                </MultiTrigger.Conditions>
+	                <Setter Property="IsEnabled" Value="True"/>
+	            </MultiTrigger>
+	        </local:GreenButton.Triggers>
+	    </local:GreenButton>
+		<Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>	
+		<local:ActivityIndicatorView Grid.RowSpan="2"
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>

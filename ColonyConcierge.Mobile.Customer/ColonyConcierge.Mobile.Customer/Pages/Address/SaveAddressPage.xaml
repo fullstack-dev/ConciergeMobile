@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+    xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+	x:Class="ColonyConcierge.Mobile.Customer.SaveAddressPage"
+	x:Name="thisPage"
+	Title="{i18n:Translate HelpUsToFindYou}">
+	<ContentPage.Content>
+		<Grid RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<local:AddressMap
+					HorizontalOptions="Fill" VerticalOptions="Fill"
+		            x:Name="Map"/>
+				<Image
+					x:Name="ImagePin"
+					HorizontalOptions="Center"
+					VerticalOptions="Center"
+					HeightRequest="24"
+					Aspect="AspectFit"
+					IsVisible="false"
+					Source="map.png"/>
+			</Grid>
+
+			<Label Grid.Row="1" x:Name="LabelAddress" HorizontalOptions="Center" FontSize="Small" Margin="10, 6"/>
+			
+			<Grid Grid.Row="2" VerticalOptions="End" Margin="20, 20" RowSpacing="0" ColumnSpacing="0">
+				<local:GreenButton x:Name="ButtonSave" Text="{i18n:Translate Iamhere}" HorizontalOptions="Fill" VerticalOptions="Center" />
+			</Grid>
+			<Grid Grid.Row="2" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+
+			<local:ActivityIndicatorView Grid.RowSpan="3"
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+		</Grid>
+	</ContentPage.Content>
+</local:ContentPageBase>

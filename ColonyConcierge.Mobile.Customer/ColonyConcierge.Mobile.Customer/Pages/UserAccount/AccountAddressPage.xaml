@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		 	 x:Class="ColonyConcierge.Mobile.Customer.AccountAddressPage"
+			 xmlns:local="clr-namespace:ColonyConcierge.Mobile.Customer"
+	         xmlns:i18n="clr-namespace:ColonyConcierge.Mobile.Customer.Localization"
+             x:Name="thisPage"
+	         Title="{i18n:Translate ServiceAddress}">
+	<Grid>
+		<ListView  HasUnevenRows="true"
+				   ItemsSource = "{Binding Source={x:Reference thisPage}, Path=AddressList}" 
+				   HorizontalOptions = "FillAndExpand"
+				   SeparatorColor="Transparent"
+				   SeparatorVisibility="None"
+				   ItemSelected="ListView_ItemSelected">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid>
+							<StackLayout Orientation ="Horizontal">
+								<StackLayout Orientation="Vertical">
+									<StackLayout Orientation ="Horizontal" Spacing = "10">
+										<Label Margin="10,15,0,15" FontSize="Medium" Text="{Binding BasicAddress, Converter={StaticResource addressToStringConverter}}" HorizontalOptions ="Fill" x:Name ="LineTwo"/>
+									</StackLayout>
+								</StackLayout>
+								<Image Source="rightarrow.png" HeightRequest="24" HorizontalOptions="EndAndExpand"/>
+							</StackLayout>
+					  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="End" HorizontalOptions="Fill"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<local:ActivityIndicatorView
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+	</Grid>
+</local:ContentPageBase>
